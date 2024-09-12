@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (eventos()) {
+      <div>
+        <h2 data-cy="eventosDetailsHeading"><span appTranslate="conexaoSolidariaApp.eventos.detail.title">Eventos</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ eventos()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.nome">Nome</span></dt>
+          <dd>
+            <span>{{ eventos()!.nome }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.dataCadastro">Data Cadastro</span></dt>
+          <dd>
+            <span>{{ eventos()!.dataCadastro | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.dataEvento">Data Evento</span></dt>
+          <dd>
+            <span>{{ eventos()!.dataEvento | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.horaInicio">Hora Inicio</span></dt>
+          <dd>
+            <span>{{ eventos()!.horaInicio }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.horaTermino">Hora Termino</span></dt>
+          <dd>
+            <span>{{ eventos()!.horaTermino }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.observacao">Observacao</span></dt>
+          <dd>
+            <span>{{ eventos()!.observacao }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.user">User</span></dt>
+          <dd>
+            <span>{{ eventos()!.user?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/eventos', eventos()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "conexaoSolidariaApp": {
+    "avaliacao": {
+      "home": {
+        "title": "Avaliacaos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Avaliacao",
+        "createOrEditLabel": "Crear o editar Avaliacao",
+        "notFound": "Ningún Avaliacaos encontrado"
+      },
+      "created": "Un nuevo Avaliacao ha sido creado con el identificador {{ param }}",
+      "updated": "Un Avaliacao ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Avaliacao ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Avaliacao {{ id }}?"
+      },
+      "detail": {
+        "title": "Avaliacao"
+      },
+      "id": "ID",
+      "estrelas": "Estrelas",
+      "observacao": "Observacao",
+      "user": "User",
+      "evento": "Evento"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-avaliacao-heading"
+        data-cy="AvaliacaoCreateUpdateHeading"
+        appTranslate="conexaoSolidariaApp.avaliacao.home.createOrEditLabel"
+      >
+        Criar ou editar Avaliacao
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="conexaoSolidariaApp.avaliacao.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_estrelas" appTranslate="conexaoSolidariaApp.avaliacao.estrelas">Estrelas</label>
+          <input type="number" class="form-control" name="estrelas" id="field_estrelas" data-cy="estrelas" formControlName="estrelas" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_observacao" appTranslate="conexaoSolidariaApp.avaliacao.observacao">Observacao</label>
+          <input
+            type="text"
+            class="form-control"
+            name="observacao"
+            id="field_observacao"
+            data-cy="observacao"
+            formControlName="observacao"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" appTranslate="conexaoSolidariaApp.avaliacao.user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_evento" appTranslate="conexaoSolidariaApp.avaliacao.evento">Evento</label>
+          <select
+            class="form-control"
+            id="field_evento"
+            data-cy="evento"
+            name="evento"
+            formControlName="evento"
+            [compareWith]="compareEventos"
+          >
+            <option [ngValue]="null"></option>
+            @for (eventosOption of eventosSharedCollection; track $index) {
+              <option [ngValue]="eventosOption">{{ eventosOption.nome }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

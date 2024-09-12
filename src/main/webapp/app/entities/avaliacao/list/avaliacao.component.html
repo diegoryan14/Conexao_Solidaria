@@ -1,0 +1,137 @@
+<div>
+  <h2 id="page-heading" data-cy="AvaliacaoHeading">
+    <span appTranslate="conexaoSolidariaApp.avaliacao.home.title">Avaliacaos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="conexaoSolidariaApp.avaliacao.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-avaliacao"
+        [routerLink]="['/avaliacao/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="conexaoSolidariaApp.avaliacao.home.createLabel">Criar novo Avaliacao</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <app-filter [filters]="filters"></app-filter>
+
+  @if (avaliacaos?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="conexaoSolidariaApp.avaliacao.home.notFound">Nenhum Avaliacao encontrado</span>
+    </div>
+  }
+
+  @if (avaliacaos && avaliacaos.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="estrelas">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.avaliacao.estrelas">Estrelas</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="observacao">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.avaliacao.observacao">Observacao</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="user.login">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.avaliacao.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="evento.nome">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.avaliacao.evento">Evento</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (avaliacao of avaliacaos; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/avaliacao', avaliacao.id, 'view']">{{ avaliacao.id }}</a>
+              </td>
+              <td>{{ avaliacao.estrelas }}</td>
+              <td>{{ avaliacao.observacao }}</td>
+              <td>
+                {{ avaliacao.user?.login }}
+              </td>
+              <td>
+                @if (avaliacao.evento) {
+                  <div>
+                    <a [routerLink]="['/eventos', avaliacao.evento.id, 'view']">{{ avaliacao.evento.nome }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/avaliacao', avaliacao.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/avaliacao', avaliacao.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(avaliacao)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (avaliacaos && avaliacaos.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

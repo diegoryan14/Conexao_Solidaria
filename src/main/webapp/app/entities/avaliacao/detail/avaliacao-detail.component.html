@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (avaliacao()) {
+      <div>
+        <h2 data-cy="avaliacaoDetailsHeading"><span appTranslate="conexaoSolidariaApp.avaliacao.detail.title">Avaliacao</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ avaliacao()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.avaliacao.estrelas">Estrelas</span></dt>
+          <dd>
+            <span>{{ avaliacao()!.estrelas }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.avaliacao.observacao">Observacao</span></dt>
+          <dd>
+            <span>{{ avaliacao()!.observacao }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.avaliacao.user">User</span></dt>
+          <dd>
+            <span>{{ avaliacao()!.user?.login }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.avaliacao.evento">Evento</span></dt>
+          <dd>
+            @if (avaliacao()!.evento) {
+              <div>
+                <a [routerLink]="['/eventos', avaliacao()!.evento?.id, 'view']">{{ avaliacao()!.evento?.nome }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/avaliacao', avaliacao()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "conexaoSolidariaApp": {
+    "eventos": {
+      "home": {
+        "title": "Eventos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Eventos",
+        "createOrEditLabel": "Criar ou editar Eventos",
+        "notFound": "Nenhum Eventos encontrado"
+      },
+      "created": "Um novo Eventos foi criado com o identificador {{ param }}",
+      "updated": "Um Eventos foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Eventos foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Eventos {{ id }}?"
+      },
+      "detail": {
+        "title": "Eventos"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "dataCadastro": "Data Cadastro",
+      "dataEvento": "Data Evento",
+      "horaInicio": "Hora Inicio",
+      "horaTermino": "Hora Termino",
+      "observacao": "Observacao",
+      "user": "User"
+    }
+  }
+}

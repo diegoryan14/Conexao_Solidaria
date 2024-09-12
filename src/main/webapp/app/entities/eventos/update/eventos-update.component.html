@@ -1,0 +1,117 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-eventos-heading" data-cy="EventosCreateUpdateHeading" appTranslate="conexaoSolidariaApp.eventos.home.createOrEditLabel">
+        Criar ou editar Eventos
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="conexaoSolidariaApp.eventos.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nome" appTranslate="conexaoSolidariaApp.eventos.nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dataCadastro" appTranslate="conexaoSolidariaApp.eventos.dataCadastro">Data Cadastro</label>
+          <div class="d-flex">
+            <input
+              id="field_dataCadastro"
+              data-cy="dataCadastro"
+              type="datetime-local"
+              class="form-control"
+              name="dataCadastro"
+              formControlName="dataCadastro"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dataEvento" appTranslate="conexaoSolidariaApp.eventos.dataEvento">Data Evento</label>
+          <div class="d-flex">
+            <input
+              id="field_dataEvento"
+              data-cy="dataEvento"
+              type="datetime-local"
+              class="form-control"
+              name="dataEvento"
+              formControlName="dataEvento"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_horaInicio" appTranslate="conexaoSolidariaApp.eventos.horaInicio">Hora Inicio</label>
+          <input
+            type="text"
+            class="form-control"
+            name="horaInicio"
+            id="field_horaInicio"
+            data-cy="horaInicio"
+            formControlName="horaInicio"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_horaTermino" appTranslate="conexaoSolidariaApp.eventos.horaTermino">Hora Termino</label>
+          <input
+            type="text"
+            class="form-control"
+            name="horaTermino"
+            id="field_horaTermino"
+            data-cy="horaTermino"
+            formControlName="horaTermino"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_observacao" appTranslate="conexaoSolidariaApp.eventos.observacao">Observacao</label>
+          <input
+            type="text"
+            class="form-control"
+            name="observacao"
+            id="field_observacao"
+            data-cy="observacao"
+            formControlName="observacao"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" appTranslate="conexaoSolidariaApp.eventos.user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

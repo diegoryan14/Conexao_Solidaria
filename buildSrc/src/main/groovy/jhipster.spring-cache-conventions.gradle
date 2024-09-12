@@ -1,0 +1,9 @@
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-cache"
+    implementation "com.github.ben-manes.caffeine:caffeine"
+    implementation "com.github.ben-manes.caffeine:jcache"
+    implementation "javax.cache:cache-api"
+    implementation "org.hibernate.orm:hibernate-jcache"
+    implementation libs.config
+    // jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+}

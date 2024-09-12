@@ -1,0 +1,30 @@
+@if (avaliacao) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(avaliacao.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="avaliacaoDeleteDialogHeading" appTranslate="entity.delete.title">Confirme a exclusão</h4>
+
+      <span class="btn btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()"></span>
+    </div>
+
+    <div class="modal-body">
+      <app-alert-error></app-alert-error>
+      <p
+        id="app-delete-avaliacao-heading"
+        appTranslate="conexaoSolidariaApp.avaliacao.delete.question"
+        [translateValues]="{ id: avaliacao.id }"
+      >
+        Tem certeza de que deseja excluir Avaliacao {{ avaliacao.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="app-confirm-delete-avaliacao" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span appTranslate="entity.action.delete">Excluir</span>
+      </button>
+    </div>
+  </form>
+}
