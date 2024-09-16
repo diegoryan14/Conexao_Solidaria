@@ -123,7 +123,10 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true);
+        newUser.setCpf(userDTO.getCpf());
+        newUser.setCnpj(userDTO.getCnpj());
+        newUser.setTipoUser(userDTO.getTipoUser());
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -163,6 +166,9 @@ public class UserService {
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
+        user.setCpf(userDTO.getCpf());
+        user.setCnpj(userDTO.getCnpj());
+        user.setTipoUser(userDTO.getTipoUser());
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO

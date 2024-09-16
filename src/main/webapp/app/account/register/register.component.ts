@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, inject, ViewChild, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,6 +14,7 @@ import { RegisterService } from './register.service';
   selector: 'app-register',
   imports: [SharedModule, RouterModule, FormsModule, ReactiveFormsModule, PasswordStrengthBarComponent],
   templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
 export default class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })
@@ -24,6 +25,9 @@ export default class RegisterComponent implements AfterViewInit {
   errorEmailExists = signal(false);
   errorUserExists = signal(false);
   success = signal(false);
+
+  UserOrEntity: boolean = true; /* true para user, false para entity */
+  UserType: string = 'COLABORADOR';
 
   registerForm = new FormGroup({
     login: new FormControl('', {
@@ -49,6 +53,7 @@ export default class RegisterComponent implements AfterViewInit {
     }),
   });
 
+  public router = inject(Router);
   private translateService = inject(TranslateService);
   private registerService = inject(RegisterService);
 
@@ -70,9 +75,25 @@ export default class RegisterComponent implements AfterViewInit {
     } else {
       const { login, email } = this.registerForm.getRawValue();
       this.registerService
-        .save({ login, email, password, langKey: this.translateService.currentLang })
-        .subscribe({ next: () => this.success.set(true), error: response => this.processError(response) });
+        .save({ login, email, password, langKey: this.translateService.currentLang, tipoUser: this.UserType })
+        .subscribe({ next: () => (this.success.set(true), this.returnLogin()), error: response => this.processError(response) });
     }
+  }
+
+  returnLogin(): void {
+    this.router.navigate(['./login']);
+  }
+
+  newEntity(): void {
+    this.UserOrEntity = false;
+    this.registerForm.reset();
+    this.UserType = 'ENTIDADE';
+  }
+
+  newUser(): void {
+    this.UserOrEntity = true;
+    this.registerForm.reset();
+    this.UserType = 'COLABORADOR';
   }
 
   private processError(response: HttpErrorResponse): void {

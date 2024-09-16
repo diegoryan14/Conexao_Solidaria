@@ -40,6 +40,9 @@
             </column>
             <column name="last_modified_by" type="varchar(50)"/>
             <column name="last_modified_date" type="timestamp"/>
+            <column name="cpf" type="varchar(11)"/>
+            <column name="cnpj" type="varchar(14)"/>
+            <column name="tipo_user" type="varchar(30)"/>
         </createTable>
 
         <createTable tableName="app_authority">

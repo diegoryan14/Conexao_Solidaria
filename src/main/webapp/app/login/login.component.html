@@ -1,4 +1,48 @@
-<div>
+<div class="dividir">
+  <div class="image-side">
+    <div class="tela-verde">
+      <div class="imagem" id="imagemDiv"></div>
+      <div class="container">
+        <h2>Conexão Solidária</h2>
+      </div>
+    </div>
+  </div>
+  <div class="login-side">
+    <form class="login-container" [formGroup]="loginForm">
+      <div class="img-logo">
+        <div class="logo">Logo</div>
+      </div>
+      <div class="input-login">
+        <label for="username">Usuário</label>
+        <input type="text" maxlength="50" placeholder="Digite seu usuário" formControlName="username" data-cy="username" pInputText />
+      </div>
+      <div class="input-login">
+        <label for="password">Senha</label>
+        <p-password
+          [toggleMask]="true"
+          [maxlength]="20"
+          [feedback]="false"
+          placeholder="Digite sua senha"
+          formControlName="password"
+          data-cy="password"
+        ></p-password>
+      </div>
+      @if (authenticationError()) {
+        <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+          <div class="alert alert-danger d-flex" data-cy="loginError">Usuário ou senha incorreto, por favor, tente novamente.</div>
+        </p-dialog>
+      }
+      <div class="forgot-password">
+        <a [routerLink]="['/account/reset/request']">Esqueci minha senha</a>
+      </div>
+      <div>
+        <button pButton pRipple label="Entrar" class="button-login" (click)="login()" type="submit" data-cy="submit"></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <div>
   <div class="d-flex justify-content-center">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <h1 data-cy="loginTitle" appTranslate="login.title">Autenticação</h1>
@@ -56,4 +100,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

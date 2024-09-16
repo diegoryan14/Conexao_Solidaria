@@ -81,6 +81,15 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @Column(name = "cpf")
+    private String cpf = null;
+
+    @Column(name = "cnpj")
+    private String cnpj = null;
+
+    @Column(name = "tipo_user")
+    private String tipoUser = null;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -197,6 +206,30 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
         this.authorities = authorities;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getTipoUser() {
+        return tipoUser;
+    }
+
+    public void setTipoUser(String tipoUser) {
+        this.tipoUser = tipoUser;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -226,6 +259,9 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+            ", cpf='" + cpf + '\'' +
+            ", cnpj='" + cnpj + '\'' +
+            ", tipoUser='" + tipoUser + '\'' +
             "}";
     }
 }

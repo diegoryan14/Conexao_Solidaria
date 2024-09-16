@@ -1,0 +1,280 @@
+.dividir {
+  width: 98vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.tela-verde {
+  background: #1b4965;
+  position: relative;
+}
+
+.alert,
+.alert-warning,
+.alert-danger {
+  padding: 8px;
+  margin: 0px;
+  border: none;
+  width: fit-content;
+}
+
+.infor-mail {
+  font-size: smaller;
+}
+
+.imagem {
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+  // background-image: url("../../../webapp/content/images/img_pagina_inicial.jpeg");
+}
+
+.img-logo {
+  display: contents;
+}
+
+.logo {
+  height: 46px;
+  margin-bottom: 3rem;
+  // background-image: url("../../../webapp/content/images/LogoVerdeClaro.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.login-side {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.container,
+.title-hidden {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+  z-index: 4;
+  opacity: 1;
+
+  h2 {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Hind', sans-serif;
+    font-optical-sizing: auto;
+  }
+}
+
+.login-container {
+  padding: 20px;
+  width: 400px;
+  height: 33rem;
+}
+
+.title-hidden {
+  display: none;
+}
+
+.material-symbols-outlined {
+  padding-bottom: 2px;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.input-login {
+  margin-bottom: 1.5rem;
+}
+
+.button-login {
+  border-radius: 5px;
+  background-color: #1b4965;
+  border-color: #1b4965;
+  color: white;
+  width: 100%;
+  opacity: 100;
+}
+.container {
+  width: 80%;
+}
+.button-login:enabled:hover,
+.button-login:focus {
+  border-color: #2f6e52 !important;
+}
+
+.forgot-password {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.forgot-password a {
+  color: #1b4965;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.forgot-password-phone {
+  display: none;
+}
+
+.register {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.register a {
+  color: #858a18;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.register a:hover {
+  text-decoration: underline;
+}
+
+::ng-deep .p-inputtext {
+  width: 100%;
+}
+
+::ng-deep .p-password {
+  width: 100%;
+}
+
+::ng-deep .p-dialog .p-dialog-header {
+  padding: 0;
+  background-color: transparent;
+}
+
+::ng-deep .p-dialog {
+  padding: 2px;
+  background-color: #f8d7da;
+  border: 2px solid #f1aeb5;
+}
+
+::ng-deep .p-dialog-content {
+  background-color: transparent;
+}
+
+::ng-deep .p-button {
+  background-color: transparent;
+  border-color: transparent !important;
+  box-shadow: 0 0 0 0.2rem transparent !important;
+}
+
+@media screen and (max-width: 720px) {
+  .dividir {
+    display: block;
+    align-items: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+  }
+
+  .text-danger {
+    --bs-text-opacity: 1;
+    color: #ffe69c !important;
+  }
+
+  .image-side {
+    display: block;
+    position: relative;
+    z-index: 1;
+
+    .container {
+      justify-content: start;
+    }
+    h2 {
+      display: none;
+    }
+  }
+
+  .login-side {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    align-items: center;
+
+    .login-container {
+      z-index: 1;
+      height: 38.9rem;
+    }
+    .img-logo {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .logo {
+      position: absolute;
+      width: 360px;
+      background-size: auto;
+      // background-image: url(../../../webapp/content/images/logo-branco.svg);
+      z-index: 2;
+    }
+  }
+
+  .forgot-password a,
+  .register a {
+    color: white;
+    font-weight: bold;
+  }
+
+  .login-container label {
+    color: white;
+    font-weight: bolder;
+    font-family: 'PT Sans', sans-serif;
+  }
+
+  .register {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .button-login {
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #858a18;
+    border-color: #858a18;
+    color: white;
+    width: 100%;
+  }
+}
+
+/* 
+  POSSIVEIS CORES PROJETO
+
+  Verde claro (#A8E6CF)
+  Azul claro (#D4F1F4)
+  Verde escuro (#56C596)
+  Azul escuro (#1B4965)
+
+*/

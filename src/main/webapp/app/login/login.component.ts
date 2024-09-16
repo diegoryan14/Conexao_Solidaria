@@ -11,11 +11,12 @@ import { AccountService } from 'app/core/auth/account.service';
   selector: 'app-login',
   imports: [SharedModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
 export default class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
-
+  visible: boolean = false;
   authenticationError = signal(false);
 
   loginForm = new FormGroup({
@@ -29,7 +30,6 @@ export default class LoginComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
 
   ngOnInit(): void {
-    // if already authenticated then navigate to home page
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
         this.router.navigate(['']);
@@ -46,7 +46,6 @@ export default class LoginComponent implements OnInit, AfterViewInit {
       next: () => {
         this.authenticationError.set(false);
         if (!this.router.getCurrentNavigation()) {
-          // There were no routing during login (eg from navigationToStoredUrl)
           this.router.navigate(['']);
         }
       },

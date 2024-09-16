@@ -16,6 +16,7 @@ import { IEventos } from '../eventos.model';
 
 import { EntityArrayResponseType, EventosService } from '../service/eventos.service';
 import { EventosDeleteDialogComponent } from '../delete/eventos-delete-dialog.component';
+import { CustomDateTimePipe } from 'app/shared/date/custom-date-time.pipe';
 
 @Component({
   standalone: true,
@@ -32,6 +33,7 @@ import { EventosDeleteDialogComponent } from '../delete/eventos-delete-dialog.co
     FormatMediumDatePipe,
     FilterComponent,
     ItemCountComponent,
+    CustomDateTimePipe,
   ],
 })
 export class EventosComponent implements OnInit {

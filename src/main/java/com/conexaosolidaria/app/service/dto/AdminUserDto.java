@@ -36,6 +36,15 @@ public class AdminUserDto implements Serializable {
     @Size(max = 256)
     private String imageUrl;
 
+    @Size(max = 11)
+    private String cpf;
+
+    @Size(max = 14)
+    private String cnpj;
+
+    @Size(max = 30)
+    private String tipoUser;
+
     private boolean activated = false;
 
     @Size(min = 2, max = 10)
@@ -69,6 +78,9 @@ public class AdminUserDto implements Serializable {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        this.cpf = user.getCpf();
+        this.cnpj = user.getCnpj();
+        this.tipoUser = user.getTipoUser();
     }
 
     public Long getId() {
@@ -175,6 +187,30 @@ public class AdminUserDto implements Serializable {
         this.authorities = authorities;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getTipoUser() {
+        return tipoUser;
+    }
+
+    public void setTipoUser(String tipoUser) {
+        this.tipoUser = tipoUser;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
@@ -191,6 +227,9 @@ public class AdminUserDto implements Serializable {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", cpf='" + cpf + '\'' +
+            ", cnpj='" + cnpj + '\'' +
+            ", tipoUser='" + tipoUser + '\'' +
             "}";
     }
 }

@@ -14,6 +14,12 @@ public class UserDto implements Serializable {
 
     private String login;
 
+    private String cpf;
+
+    private String cnpj;
+
+    private String tipoUser;
+
     public UserDto() {
         // Empty constructor needed for Jackson.
     }
@@ -22,6 +28,9 @@ public class UserDto implements Serializable {
         this.id = user.getId();
         // Customize it here if you need, or not, firstName/lastName/etc
         this.login = user.getLogin();
+        this.cpf = user.getCpf();
+        this.cnpj = user.getCnpj();
+        this.tipoUser = user.getTipoUser();
     }
 
     public Long getId() {
@@ -40,12 +49,39 @@ public class UserDto implements Serializable {
         this.login = login;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getTipoUser() {
+        return tipoUser;
+    }
+
+    public void setTipoUser(String tipoUser) {
+        this.tipoUser = tipoUser;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
         return "UserDto{" +
             "id='" + id + '\'' +
             ", login='" + login + '\'' +
+            ", cpf='" + cpf + '\'' +
+            ", cnpj='" + cnpj + '\'' +
+            ", tipoUser='" + tipoUser + '\'' +
             "}";
     }
 }
