@@ -38,6 +38,9 @@
       <div>
         <button pButton pRipple label="Entrar" class="button-login" (click)="login()" type="submit" data-cy="submit"></button>
       </div>
+      <div class="forgot-password text-center" style="margin-top: 15px; color: black">
+        <a [routerLink]="['/account/register']">Não tem conta? Cadastre-se</a>
+      </div>
     </form>
   </div>
 </div>
