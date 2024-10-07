@@ -1,82 +1,286 @@
-<div class="row">
-  <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
-  </div>
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conexão Solidária</title>
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <!-- Header com menu de navegação -->
 
-  <div class="col-md-9">
-    <h1 class="display-4"><span appTranslate="home.title">Bem vindo, Java Hipster!</span> (Conexao Solidaria)</h1>
+    <!-- Seção principal com chamada de ação -->
+    <section class="hero">
+      <!-- <div class="hero-content">
+      <h2>Conectando Voluntários e Entidades</h2>
+      <p>Doe seu tempo, talento ou recursos para causas que você acredita. Junte-se à nossa rede de solidariedade.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-volunteer">Quero ser Voluntário</a>
+        <a href="#" class="btn-entity">Sou uma Entidade</a>
+      </div>
+    </div> -->
+    </section>
 
-    <p class="lead" appTranslate="home.subtitle">Esta é a página principal</p>
-
-    <div>
-      @if (account() !== null) {
-        <div class="alert alert-success">
-          @if (account()) {
-            <span id="home-logged-message" appTranslate="home.logged.message" [translateValues]="{ username: account()!.login }"
-              >Você está logado como &quot;{{ account()!.login }}&quot;.</span
-            >
-          }
+    <section class="hero1">
+      <div class="hero-content">
+        <h2>Conectando Voluntários e Entidades</h2>
+        <p>Doe seu tempo, talento ou recursos para causas que você acredita. Junte-se à nossa rede de solidariedade.</p>
+        <div class="cta-buttons">
+          <a href="#" class="btn-volunteer">Quero ser Voluntário</a>
+          <a href="#" class="btn-entity">Sou uma Entidade</a>
         </div>
-      } @else {
-        <div class="alert alert-warning">
-          <span appTranslate="global.messages.info.authenticated.prefix">Se deseja </span>
-          <a class="alert-link" (click)="login()" appTranslate="global.messages.info.authenticated.link">entrar</a
-          ><span appTranslate="global.messages.info.authenticated.suffix"
-            >, utilize as seguintes contas padrões:<br />- Administrador (usuário=&quot;admin&quot; and senha=&quot;admin&quot;) <br />-
-            Usuário (usuário=&quot;user&quot; e senha=&quot;user&quot;).</span
-          >
+      </div>
+    </section>
+    <!-- Seção sobre como funciona -->
+    <section class="how-it-works">
+      <h3>Como Funciona?</h3>
+      <div class="steps">
+        <div class="step">
+          <h4>1. Cadastre-se</h4>
+          <p>Crie uma conta como voluntário ou entidade em poucos minutos.</p>
         </div>
-
-        <div class="alert alert-warning">
-          <span appTranslate="global.messages.info.register.noaccount">Não possui uma conta ainda?</span>&nbsp;
-          <a class="alert-link" routerLink="/account/register" appTranslate="global.messages.info.register.link">Crie uma nova conta</a>
+        <div class="step">
+          <h4>2. Escolha uma Causa</h4>
+          <p>Descubra causas que precisam de ajuda e se envolva.</p>
         </div>
-      }
-    </div>
+        <div class="step">
+          <h4>3. Faça a Diferença</h4>
+          <p>Doe seu tempo, talentos ou recursos e ajude a transformar vidas.</p>
+        </div>
+      </div>
+    </section>
 
-    <p appTranslate="home.question">Em caso de dúvida sobre o JHipster:</p>
+    <!-- Seção com informações sobre a startup -->
+    <section class="about">
+      <h3>Sobre a Conexão Solidária</h3>
+      <p>
+        Somos uma plataforma que conecta pessoas e entidades que querem fazer a diferença no mundo. Acreditamos que o voluntariado tem o
+        poder de transformar a sociedade, promovendo empatia, solidariedade e cooperação.
+      </p>
+    </section>
 
-    <ul>
-      <li>
-        <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" appTranslate="home.link.homepage"
-          >Página principal JHipster</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://stackoverflow.com/tags/jhipster/info"
-          target="_blank"
-          rel="noopener noreferrer"
-          appTranslate="home.link.stackoverflow"
-          >JHipster no Stack Overflow</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/jhipster/generator-jhipster/issues?state=open"
-          target="_blank"
-          rel="noopener noreferrer"
-          appTranslate="home.link.bugtracker"
-          >JHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" appTranslate="home.link.chat"
-          >Sala de bate-papo pública JHipster</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" appTranslate="home.link.follow"
-          >siga &#64;jhipster no Twitter</a
-        >
-      </li>
-    </ul>
+    <!-- Footer com informações de contato -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Conexão Solidária - Todos os direitos reservados.</p>
+        <ul>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
 
-    <p>
-      <span appTranslate="home.like">Se você gosta do JHipster, não se esqueça de avaliar no</span>
-      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" appTranslate="home.github"
-        >GitHub</a
-      >!
-    </p>
-  </div>
-</div>
+<style>
+  /* Estilos globais */
+  /* Estilos globais */
+  /* Estilos globais */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+
+  header {
+    background-color: #00796b;
+    color: white;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar ul li {
+    margin-right: 20px;
+  }
+
+  .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* Tornando o menu de navegação responsivo */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+    }
+    .navbar ul {
+      flex-direction: column;
+      align-items: center;
+    }
+    .navbar ul li {
+      margin: 10px 0;
+    }
+  }
+
+  /* Seção hero */
+  .hero {
+    background: url('../../content/images/Conexão2.gif');
+    background-size: cover;
+    background-position: center;
+    padding: 250px 20px;
+    text-align: center;
+  }
+
+  .hero1 {
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h2 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .cta-buttons {
+    margin-top: 20px;
+  }
+
+  .btn-volunteer,
+  .btn-entity {
+    background-color: #00796b;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .btn-volunteer:hover,
+  .btn-entity:hover {
+    background-color: #004d40;
+  }
+
+  /* Responsividade para a seção hero */
+  @media (max-width: 768px) {
+    .hero h2 {
+      font-size: 1.8rem;
+    }
+    .hero p {
+      font-size: 1rem;
+    }
+    .cta-buttons {
+      flex-direction: column;
+    }
+  }
+
+  /* Seção 'Como Funciona' */
+  .how-it-works {
+    padding: 50px 20px;
+    text-align: center;
+  }
+
+  .how-it-works h3 {
+    margin-bottom: 40px;
+  }
+
+  .steps {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .step {
+    max-width: 250px;
+  }
+
+  @media (max-width: 768px) {
+    .steps {
+      flex-direction: column;
+      align-items: center;
+    }
+    .step {
+      margin-bottom: 20px;
+    }
+  }
+
+  /* Seção sobre */
+  .about {
+    background-color: #e0f7fa;
+    padding: 50px 20px;
+    text-align: center;
+  }
+
+  .about h3 {
+    margin-bottom: 20px;
+  }
+
+  /* Footer */
+  .footer-content {
+    background-color: #004d40;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .footer-content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-content ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+
+  .footer-content ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .footer-content ul li a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsividade geral */
+  @media (max-width: 600px) {
+    .hero-content {
+      padding: 10px;
+    }
+
+    .steps {
+      padding: 0 20px;
+    }
+
+    .btn-volunteer,
+    .btn-entity {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 0.9rem;
+    }
+  }
+</style>
