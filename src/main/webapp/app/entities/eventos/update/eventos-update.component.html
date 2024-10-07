@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="app-eventos-heading" data-cy="EventosCreateUpdateHeading" appTranslate="conexaoSolidariaApp.eventos.home.createOrEditLabel">
-        Criar ou editar Eventos
+      <h2 style="text-align: center; margin-top: 20px; font-weight: bold" id="app-eventos-heading" data-cy="EventosCreateUpdateHeading">
+        Criar Eventos
       </h2>
 
       <div>
@@ -20,7 +20,7 @@
           <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="field_dataCadastro" appTranslate="conexaoSolidariaApp.eventos.dataCadastro">Data Cadastro</label>
           <div class="d-flex">
             <input
@@ -33,7 +33,7 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-        </div>
+        </div> -->
 
         <div class="mb-3">
           <label class="form-label" for="field_dataEvento" appTranslate="conexaoSolidariaApp.eventos.dataEvento">Data Evento</label>
@@ -45,7 +45,7 @@
               class="form-control"
               name="dataEvento"
               formControlName="dataEvento"
-              placeholder="YYYY-MM-DD HH:mm"
+              placeholder="DD/MM/YYYY HH:mm"
             />
           </div>
         </div>
@@ -86,7 +86,7 @@
           />
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="field_user" appTranslate="conexaoSolidariaApp.eventos.user">User</label>
           <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
             <option [ngValue]="null"></option>
@@ -94,7 +94,7 @@
               <option [ngValue]="userOption">{{ userOption.login }}</option>
             }
           </select>
-        </div>
+        </div> -->
       </div>
 
       <div>

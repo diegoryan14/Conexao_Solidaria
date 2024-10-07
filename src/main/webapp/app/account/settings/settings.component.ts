@@ -14,10 +14,12 @@ const initialAccount: Account = {} as Account;
   selector: 'app-settings',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
   templateUrl: './settings.component.html',
+  styleUrl: './settings.component.scss',
 })
 export default class SettingsComponent implements OnInit {
   success = signal(false);
   languages = LANGUAGES;
+  infoUser: {} = {};
 
   settingsForm = new FormGroup({
     firstName: new FormControl(initialAccount.firstName, {
@@ -45,8 +47,10 @@ export default class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => {
+      console.warn(account);
       if (account) {
         this.settingsForm.patchValue(account);
+        this.infoUser = account;
       }
     });
   }

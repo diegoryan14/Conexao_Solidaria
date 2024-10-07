@@ -1,0 +1,75 @@
+.profile-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; /* Centraliza o formulário */
+  width: 100%;
+}
+
+.profile-picture-section {
+  position: relative;
+  margin-right: 20px;
+}
+
+.profile-picture {
+  position: relative;
+}
+
+.profile-picture img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.edit-photo-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.edit-photo-icon i {
+  font-size: 24px;
+  color: #2196f3; /* Cor para o ícone de edição */
+}
+
+.profile-details-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%; /* Faz com que o formulário ocupe toda a largura possível */
+  max-width: 800px; /* Define um limite para a largura máxima */
+}
+
+.name-fields {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.name-fields input {
+  width: 100%; /* Faz os campos de input ocuparem a largura total */
+}
+
+.email-field,
+.language-field {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.save-button {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end; /* Alinha o botão à direita */
+}
+
+.form-control {
+  width: 100%; /* Faz com que os inputs fiquem mais largos */
+}
+
+select {
+  width: 100%; /* Faz o select ocupar a largura total */
+}

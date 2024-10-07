@@ -8,13 +8,7 @@ import { ProfileService } from './profile.service';
 @Component({
   standalone: true,
   selector: 'app-page-ribbon',
-  template: `
-    @if (ribbonEnv$ | async; as ribbonEnv) {
-      <div class="ribbon">
-        <a href="" [appTranslate]="'global.ribbon.' + (ribbonEnv ?? '')">{{ { dev: 'Desenvolvimento' }[ribbonEnv ?? ''] }}</a>
-      </div>
-    }
-  `,
+  template: ``,
   styleUrl: './page-ribbon.component.scss',
   imports: [SharedModule],
 })
