@@ -1,297 +1,341 @@
-<div class="dividir">
-  <div class="image-side">
-    <div class="tela-verde">
-      <div class="imagem" id="imagemDiv"></div>
-      <div class="container">
-        <h2>Conexão Solidária</h2>
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conexão Solidária</title>
+    <link rel="stylesheet" href="" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="ImgFundo">
+      <div class="login-container">
+        <div class="dividir">
+          <div class="login-side">
+            <div class="card-login">
+              <form class="form-login" [formGroup]="registerForm">
+                <!-- Seleciona usuario ou entidade -->
+                <div>
+                  <label for="type"
+                    >Tipo de Cadastro
+                    <select formControlName="type" (change)="registerForm.get('type')?.value === 'user' ? newUser() : newEntity()">
+                      <option value="user">Usuário</option>
+                      <option value="entity">Entidade</option>
+                    </select>
+                  </label>
+                </div>
+                <!-- Voluntario -->
+                <div *ngIf="UserOrEntity">
+                  <div class="input-login">
+                    <label for="login">Usuário</label>
+                    <input type="text" maxlength="50" placeholder="Digite seu usuário" formControlName="login" data-cy="login" pInputText />
+                    <ng-container
+                      *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
+                    >
+                      <small *ngIf="registerForm.get('login')?.errors?.required" class="form-text text-danger"
+                        >O usuário é obrigatório.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.minlength" class="form-text text-danger"
+                        >O usuário deve ter pelo menos 1 caractere.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.maxlength" class="form-text text-danger"
+                        >O usuário não pode ter mais de 50 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.pattern" class="form-text text-danger">O usuário é inválido.</small>
+                    </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="email">Email</label>
+                    <input type="text" maxlength="50" placeholder="Digite seu e-mail" formControlName="email" data-cy="email" pInputText />
+                    <ng-container
+                      *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+                    >
+                      <small *ngIf="registerForm.get('email')?.errors?.required" class="form-text text-danger"
+                        >O e-mail é obrigatório.</small
+                      >
+                      <small *ngIf="registerForm.get('email')?.errors?.invalid" class="form-text text-danger">E-mail inválido.</small>
+                      <small *ngIf="registerForm.get('email')?.errors?.minlength" class="form-text text-danger"
+                        >O e-mail deve ter pelo menos 5 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('email')?.errors?.maxlength" class="form-text text-danger"
+                        >O e-mail não pode ter mais de 50 caracteres.</small
+                      >
+                    </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="password">Senha</label>
+                    <p-password
+                      [toggleMask]="true"
+                      [maxlength]="20"
+                      [feedback]="false"
+                      placeholder="Digite sua senha"
+                      formControlName="password"
+                      data-cy="password"
+                    ></p-password>
+                    <ng-container
+                      *ngIf="
+                        registerForm.get('password')?.invalid &&
+                        (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)
+                      "
+                    >
+                      <small *ngIf="registerForm.get('password')?.errors?.required" class="form-text text-danger"
+                        >A senha é obrigatória.</small
+                      >
+                      <small *ngIf="registerForm.get('password')?.errors?.minlength" class="form-text text-danger"
+                        >A senha deve ter pelo menos 4 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('password')?.errors?.maxlength" class="form-text text-danger"
+                        >A senha não pode ter mais de 50 caracteres.</small
+                      >
+                    </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="confirmPassword">Confirmar Senha</label>
+                    <p-password
+                      [toggleMask]="true"
+                      [maxlength]="20"
+                      [feedback]="false"
+                      placeholder="Confirme sua senha"
+                      formControlName="confirmPassword"
+                      data-cy="confirmPassword"
+                    ></p-password>
+                    <ng-container
+                      *ngIf="
+                        registerForm.get('confirmPassword')?.invalid &&
+                        (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)
+                      "
+                    >
+                      <small *ngIf="registerForm.get('confirmPassword')?.errors?.required" class="form-text text-danger"
+                        >A confirmação da senha é obrigatória.</small
+                      >
+                      <small *ngIf="registerForm.get('confirmPassword')?.errors?.minlength" class="form-text text-danger"
+                        >A confirmação da senha deve ter pelo menos 4 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('confirmPassword')?.errors?.maxlength" class="form-text text-danger"
+                        >A confirmação da senha não pode ter mais de 50 caracteres.</small
+                      >
+                    </ng-container>
+                  </div>
+                </div>
+                <!-- Entidade -->
+                <div *ngIf="!UserOrEntity">
+                  <div class="input-login">
+                    <label for="login">Entidade</label>
+                    <input
+                      type="text"
+                      maxlength="50"
+                      placeholder="Digite sua entidade"
+                      formControlName="login"
+                      data-cy="login"
+                      pInputText
+                    />
+                    <ng-container
+                      *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
+                    >
+                      <small *ngIf="registerForm.get('login')?.errors?.required" class="form-text text-danger"
+                        >A entidade é obrigatória.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.minlength" class="form-text text-danger"
+                        >A entidade deve ter pelo menos 1 caractere.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.maxlength" class="form-text text-danger"
+                        >A entidade não pode ter mais de 50 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.pattern" class="form-text text-danger">A entidade é inválida.</small>
+                    </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="email">Email</label>
+                    <input type="text" maxlength="50" placeholder="Digite seu e-mail" formControlName="email" data-cy="email" pInputText />
+                    <ng-container
+                      *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+                    >
+                      <small *ngIf="registerForm.get('email')?.errors?.required" class="form-text text-danger"
+                        >O e-mail é obrigatório.</small
+                      >
+                      <small *ngIf="registerForm.get('email')?.errors?.invalid" class="form-text text-danger">E-mail inválido.</small>
+                      <small *ngIf="registerForm.get('email')?.errors?.minlength" class="form-text text-danger"
+                        >O e-mail deve ter pelo menos 5 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('email')?.errors?.maxlength" class="form-text text-danger"
+                        >O e-mail não pode ter mais de 50 caracteres.</small
+                      >
+                    </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="password">Senha</label>
+                    <p-password
+                      [toggleMask]="true"
+                      [maxlength]="20"
+                      [feedback]="false"
+                      placeholder="Digite sua senha"
+                      formControlName="password"
+                      data-cy="password"
+                    ></p-password>
+                    <ng-container
+                      *ngIf="
+                        registerForm.get('password')?.invalid &&
+                        (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)
+                      "
+                    >
+                      <small *ngIf="registerForm.get('password')?.errors?.required" class="form-text text-danger"
+                        >A senha é obrigatória.</small
+                      >
+                      <small *ngIf="registerForm.get('password')?.errors?.minlength" class="form-text text-danger"
+                        >A senha deve ter pelo menos 4 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('password')?.errors?.maxlength" class="form-text text-danger"
+                        >A senha não pode ter mais de 50 caracteres.</small
+                      >
+                    </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="confirmPassword">Confirmar Senha</label>
+                    <p-password
+                      [toggleMask]="true"
+                      [maxlength]="20"
+                      [feedback]="false"
+                      placeholder="Confirme sua senha"
+                      formControlName="confirmPassword"
+                      data-cy="confirmPassword"
+                    ></p-password>
+                    <ng-container
+                      *ngIf="
+                        registerForm.get('confirmPassword')?.invalid &&
+                        (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)
+                      "
+                    >
+                      <small *ngIf="registerForm.get('confirmPassword')?.errors?.required" class="form-text text-danger"
+                        >A confirmação da senha é obrigatória.</small
+                      >
+                      <small *ngIf="registerForm.get('confirmPassword')?.errors?.minlength" class="form-text text-danger"
+                        >A confirmação da senha deve ter pelo menos 4 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('confirmPassword')?.errors?.maxlength" class="form-text text-danger"
+                        >A confirmação da senha não pode ter mais de 50 caracteres.</small
+                      >
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="login-actions">
+                  <button pButton pRipple label="Cadastrar" (click)="register()" type="submit" data-cy="submit"></button>
+                </div>
+
+                <div style="margin-top: 10px; color: rgb(0, 176, 235); font-size: 20px">
+                  <span>Já possui uma conta?</span>
+                  <a href="../../login" class="alert-link">Faça login!</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="login-side">
-    @if (!success()) {
-      <form class="login-container" [formGroup]="registerForm" *ngIf="UserOrEntity">
-        <div class="img-logo">
-          <div class="logo"></div>
-        </div>
-        <div class="input-login">
-          <label for="login">Usuário</label>
-          <input type="text" maxlength="50" placeholder="Digite seu usuário" formControlName="login" data-cy="login" pInputText />
-          @if (registerForm.get('login')!.invalid && (registerForm.get('login')!.dirty || registerForm.get('login')!.touched)) {
-            <div>
-              @if (registerForm.get('login')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.required"
-                  >O usuário é obrigatório.</small
-                >
-              }
+    </section>
+  </body>
+</html>
 
-              @if (registerForm.get('login')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.minlength"
-                  >O usuário deve ter pelo menos 1 caractere.</small
-                >
-              }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-              @if (registerForm.get('login')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.maxlength"
-                  >O usuário não pode ter mais de 50 caracteres.</small
-                >
-              }
+  .ImgFundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../content/images/Cadastro.png') no-repeat center/cover;
+    z-index: -1;
+  }
 
-              @if (registerForm.get('login')?.errors?.pattern) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.pattern">O usuário é inválido.</small>
-              }
-            </div>
-          }
-        </div>
-        <div class="input-login">
-          <label for="email">Email</label>
-          <input type="text" maxlength="50" placeholder="Digite seu e-mail" formControlName="email" data-cy="email" pInputText />
-          @if (registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)) {
-            <div>
-              @if (registerForm.get('email')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.required">O e-mail é obrigatório.</small>
-              }
+  .dividir {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+  }
 
-              @if (registerForm.get('email')?.errors?.invalid) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.invalid">E-mail inválido.</small>
-              }
+  .login-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-              @if (registerForm.get('email')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.minlength"
-                  >O e-mail deve ter pelo menos 5 caracteres</small
-                >
-              }
+  .login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Hanken Grotesk';
+  }
 
-              @if (registerForm.get('email')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.maxlength"
-                  >O e-mail não pode ter mais de 50 caracteres</small
-                >
-              }
-            </div>
-          }
-        </div>
-        <!-- <div class="input-login">
-          <label for="email">Cpf</label>
-          <input type="text" maxlength="14" placeholder="Digite seu cpf" formControlName="cpf" data-cy="cpf" pInputText/>
-        </div> -->
-        <div class="input-login">
-          <label for="password">Senha</label>
-          <p-password
-            [toggleMask]="true"
-            [maxlength]="20"
-            [feedback]="false"
-            placeholder="Digite sua senha"
-            formControlName="password"
-            data-cy="password"
-          ></p-password>
-          @if (registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)) {
-            <div>
-              @if (registerForm.get('password')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.newpassword.required"
-                  >A senha é obrigatória.</small
-                >
-              }
+  .card-login {
+    background: #fff;
+    margin-top: 25%;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    max-width: 20%;
+    text-align: center;
+  }
 
-              @if (registerForm.get('password')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.newpassword.minlength"
-                  >A senha deve ter pelo menos 4 caracteres</small
-                >
-              }
+  .form-login {
+    display: flex;
+    flex-direction: column;
+  }
 
-              @if (registerForm.get('password')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.newpassword.maxlength"
-                  >A senha não pode ter mais de 50 caracteres</small
-                >
-              }
-            </div>
-          }
-        </div>
-        <div class="input-login">
-          <label for="confirmPassword">Confirmar Senha</label>
-          <p-password
-            [toggleMask]="true"
-            [maxlength]="20"
-            [feedback]="false"
-            placeholder="Confirme sua senha"
-            formControlName="confirmPassword"
-            data-cy="confirmPassword"
-          ></p-password>
-          @if (
-            registerForm.get('confirmPassword')!.invalid &&
-            (registerForm.get('confirmPassword')!.dirty || registerForm.get('confirmPassword')!.touched)
-          ) {
-            <div>
-              @if (registerForm.get('confirmPassword')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.confirmpassword.required"
-                  >A confirmação da senha é obrigatória.</small
-                >
-              }
+  .login-actions {
+    margin-top: 10px;
+  }
 
-              @if (registerForm.get('confirmPassword')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.confirmpassword.minlength"
-                  >A confirmação da senha deve ter pelo menos 4 caracteres</small
-                >
-              }
+  .login-actions button {
+    width: 100%;
+    padding: 10px;
+    background-color: #004aad;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
 
-              @if (registerForm.get('confirmPassword')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.confirmpassword.maxlength"
-                  >A confirmação da senha não pode ter mais de 50 caracteres</small
-                >
-              }
-            </div>
-          }
-        </div>
-        <div>
-          <button pButton pRipple label="Cadastrar" class="button-login" (click)="register()" type="submit" data-cy="submit"></button>
-        </div>
-        <div class="" style="margin-top: 10px; color: black">
-          <span>Não quer criar uma conta como usuário?</span>
-          <a class="alert-link" (click)="newEntity()">Crie uma conta como entidade!</a>
-        </div>
-      </form>
-    }
-    @if (!success()) {
-      <form class="login-container" [formGroup]="registerForm" *ngIf="!UserOrEntity">
-        <div class="img-logo">
-          <div class="logo"></div>
-        </div>
-        <div class="input-login">
-          <label for="login">Entidade</label>
-          <input type="text" maxlength="50" placeholder="Digite sua entidade" formControlName="login" data-cy="login" pInputText />
-          @if (registerForm.get('login')!.invalid && (registerForm.get('login')!.dirty || registerForm.get('login')!.touched)) {
-            <div>
-              @if (registerForm.get('login')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.required"
-                  >A entidade é obrigatório.</small
-                >
-              }
+  .login-actions button:hover {
+    background-color: #003780;
+  }
 
-              @if (registerForm.get('login')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.minlength"
-                  >A entidade deve ter pelo menos 1 caractere.</small
-                >
-              }
+  .input-login {
+    margin-bottom: 15px;
+  }
 
-              @if (registerForm.get('login')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.maxlength"
-                  >A entidade não pode ter mais de 50 caracteres.</small
-                >
-              }
+  .input-login label {
+    margin-bottom: 8px;
+  }
 
-              @if (registerForm.get('login')?.errors?.pattern) {
-                <small class="form-text text-danger" appTranslate="register.messages.validate.login.pattern">A entidade é inválida.</small>
-              }
-            </div>
-          }
-        </div>
-        <div class="input-login">
-          <label for="email">Email</label>
-          <input type="text" maxlength="50" placeholder="Digite seu e-mail" formControlName="email" data-cy="email" pInputText />
-          @if (registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)) {
-            <div>
-              @if (registerForm.get('email')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.required">O e-mail é obrigatório.</small>
-              }
+  .input-login input {
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+  }
 
-              @if (registerForm.get('email')?.errors?.invalid) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.invalid">E-mail inválido.</small>
-              }
-
-              @if (registerForm.get('email')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.minlength"
-                  >O e-mail deve ter pelo menos 5 caracteres</small
-                >
-              }
-
-              @if (registerForm.get('email')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.email.maxlength"
-                  >O e-mail não pode ter mais de 50 caracteres</small
-                >
-              }
-            </div>
-          }
-        </div>
-        <!-- <div class="input-login">
-          <label for="email">Cnpj</label>
-          <input type="text" maxlength="14" placeholder="Digite seu cnpj" formControlName="cnpj" data-cy="cnpj" pInputText/>
-        </div> -->
-        <div class="input-login">
-          <label for="password">Senha</label>
-          <p-password
-            [toggleMask]="true"
-            [maxlength]="20"
-            [feedback]="false"
-            placeholder="Digite sua senha"
-            formControlName="password"
-            data-cy="password"
-          ></p-password>
-          @if (registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)) {
-            <div>
-              @if (registerForm.get('password')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.newpassword.required"
-                  >A senha é obrigatória.</small
-                >
-              }
-
-              @if (registerForm.get('password')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.newpassword.minlength"
-                  >A senha deve ter pelo menos 4 caracteres</small
-                >
-              }
-
-              @if (registerForm.get('password')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.newpassword.maxlength"
-                  >A senha não pode ter mais de 50 caracteres</small
-                >
-              }
-            </div>
-          }
-        </div>
-        <div class="input-login">
-          <label for="confirmPassword">Confirmar Senha</label>
-          <p-password
-            [toggleMask]="true"
-            [maxlength]="20"
-            [feedback]="false"
-            placeholder="Confirme sua senha"
-            formControlName="confirmPassword"
-            data-cy="confirmPassword"
-          ></p-password>
-          @if (
-            registerForm.get('confirmPassword')!.invalid &&
-            (registerForm.get('confirmPassword')!.dirty || registerForm.get('confirmPassword')!.touched)
-          ) {
-            <div>
-              @if (registerForm.get('confirmPassword')?.errors?.required) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.confirmpassword.required"
-                  >A confirmação da senha é obrigatória.</small
-                >
-              }
-
-              @if (registerForm.get('confirmPassword')?.errors?.minlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.confirmpassword.minlength"
-                  >A confirmação da senha deve ter pelo menos 4 caracteres</small
-                >
-              }
-
-              @if (registerForm.get('confirmPassword')?.errors?.maxlength) {
-                <small class="form-text text-danger" appTranslate="global.messages.validate.confirmpassword.maxlength"
-                  >A confirmação da senha não pode ter mais de 50 caracteres</small
-                >
-              }
-            </div>
-          }
-        </div>
-        <div>
-          <button pButton pRipple label="Cadastrar" class="button-login" (click)="register()" type="submit" data-cy="submit"></button>
-        </div>
-        <div class="" style="margin-top: 10px; color: black">
-          <span>Não quer criar uma conta como entidade?</span>
-          <a class="alert-link" (click)="newUser()">Crie uma conta como usuário!</a>
-        </div>
-      </form>
-    }
-  </div>
-</div>
+  .input-login input:focus {
+    border-color: #004aad;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 74, 173, 0.5);
+  }
+</style>
 
 <!-- <div>
   <div class="d-flex justify-content-center">

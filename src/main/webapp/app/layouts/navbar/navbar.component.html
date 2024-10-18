@@ -1,9 +1,8 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-primary">
+<nav data-cy="navbar" class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-      <span class="logo-img"></span>
-      <span class="navbar-title" appTranslate="global.title">ConexaoSolidaria</span>
-      <span class="navbar-version">{{ version }}</span>
+      <!-- <span class="navbar-title" appTranslate="">Conexão Solidária</span> -->
+      <!-- <span class="navbar-version">{{ version }}</span> -->
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -251,3 +250,75 @@
     </div>
   </div>
 </nav>
+
+<style>
+  /* Navbar transparente */
+  .navbar {
+    background-color: rgba(0, 0, 0, 0); /* Fundo preto com 50% de transparência */
+    padding: 1rem; /* Espaçamento interno */
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Estilo dos links */
+  .navbar-nav .nav-item .nav-link {
+    color: #004aad;
+    font-size: 1rem;
+  }
+
+  /* Cor de hover nos links */
+  .navbar-nav .nav-item .nav-link:hover {
+    color: #5cbae6; /* Cor de hover para os links */
+  }
+
+  /* Cor dos ícones */
+  .navbar-nav .nav-item .fa-icon {
+    color: #5cbae6; /* Cor amarela para os ícones */
+  }
+
+  /* Hover nos ícones */
+  .navbar-nav .nav-item .fa-icon:hover {
+    color: #ffffff; /* Cor branca ao passar o mouse sobre os ícones */
+  }
+
+  .dropdown-menu {
+    background-color: #5cbae6; /* Fundo do dropdown mais escuro */
+  }
+
+  .dropdown-menu .dropdown-item {
+    color: white;
+  }
+
+  .dropdown-menu .dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo de hover transparente */
+  }
+
+  /* Ajusta ícones dentro do dropdown */
+  .dropdown-menu .fa-icon {
+    color: #5cbae6; /* Cor amarela para ícones no dropdown */
+  }
+
+  .dropdown-menu .fa-icon:hover {
+    color: #ffffff; /* Cor branca ao passar o mouse sobre os ícones no dropdown */
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
+
+  .profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+</style>

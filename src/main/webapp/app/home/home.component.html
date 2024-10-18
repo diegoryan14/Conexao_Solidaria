@@ -5,46 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conexão Solidária</title>
     <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
   </head>
   <body>
     <!-- Header com menu de navegação -->
 
     <!-- Seção principal com chamada de ação -->
-    <section class="hero">
-      <!-- <div class="hero-content">
-      <h2>Conectando Voluntários e Entidades</h2>
-      <p>Doe seu tempo, talento ou recursos para causas que você acredita. Junte-se à nossa rede de solidariedade.</p>
-      <div class="cta-buttons">
-        <a href="#" class="btn-volunteer">Quero ser Voluntário</a>
-        <a href="#" class="btn-entity">Sou uma Entidade</a>
-      </div>
-    </div> -->
-    </section>
-
+    <section class="hero"></section>
     <section class="hero1">
       <div class="hero-content">
-        <h2>Conectando Voluntários e Entidades</h2>
-        <p>Doe seu tempo, talento ou recursos para causas que você acredita. Junte-se à nossa rede de solidariedade.</p>
+        <h2 style="color: #004aad"><strong>CONECTANDO VOLUNTÁRIOS E ENTIDADES</strong></h2>
+        <p style="color: #004aad">
+          Doe seu tempo, talento ou recursos para causas que você acredita. Junte-se à nossa rede de solidariedade.
+        </p>
         <div class="cta-buttons">
-          <a href="#" class="btn-volunteer">Quero ser Voluntário</a>
-          <a href="#" class="btn-entity">Sou uma Entidade</a>
+          <a href="/account/register" class="btn-voluntario">Quero ser Voluntário</a>
+          <a href="/account/register" class="btn-entidade">Sou uma Entidade</a>
         </div>
       </div>
     </section>
     <!-- Seção sobre como funciona -->
     <section class="how-it-works">
-      <h3>Como Funciona?</h3>
-      <div class="steps">
-        <div class="step">
-          <h4>1. Cadastre-se</h4>
+      <h3><strong>COMO FUNCIONA ?</strong></h3>
+      <div class="cards-container">
+        <div class="card">
+          <i class="fas fa-user-plus"></i>
+          <h4><strong>Cadastre-se</strong></h4>
           <p>Crie uma conta como voluntário ou entidade em poucos minutos.</p>
         </div>
-        <div class="step">
-          <h4>2. Escolha uma Causa</h4>
+        <div class="card">
+          <i class="fas fa-hands-helping"></i>
+          <h4><strong>Escolha uma Causa</strong></h4>
           <p>Descubra causas que precisam de ajuda e se envolva.</p>
         </div>
-        <div class="step">
-          <h4>3. Faça a Diferença</h4>
+        <div class="card">
+          <i class="fas fa-heart"></i>
+          <h4><strong> Faça a Diferença</strong></h4>
           <p>Doe seu tempo, talentos ou recursos e ajude a transformar vidas.</p>
         </div>
       </div>
@@ -52,11 +49,38 @@
 
     <!-- Seção com informações sobre a startup -->
     <section class="about">
-      <h3>Sobre a Conexão Solidária</h3>
+      <h3><strong>Sobre a Conexão Solidária</strong></h3>
       <p>
-        Somos uma plataforma que conecta pessoas e entidades que querem fazer a diferença no mundo. Acreditamos que o voluntariado tem o
-        poder de transformar a sociedade, promovendo empatia, solidariedade e cooperação.
+        A <strong>Conexão Solidária</strong> é uma startup inovadora que conecta pessoas dispostas a ajudar com entidades que precisam de
+        apoio. Acreditamos que cada pequeno gesto de solidariedade pode gerar um grande impacto na vida das pessoas e em nossas comunidades.
       </p>
+      <div class="gif-container">
+        <img src="../../content/images/SlideConexaoSolidaria.gif" alt="Gif explicativo sobre a Conexão Solidária" />
+      </div>
+
+      <!-- <div class="differences">
+        <h4>O que nos torna diferentes?</h4>
+        <ul>
+          <li><strong>Foco em Necessidades Locais:</strong> Identificamos as regiões que mais precisam de apoio e facilitamos a conexão com voluntários dispostos a agir.</li>
+          <li><strong>Transparência e Impacto:</strong> Mostramos claramente o impacto do seu trabalho, permitindo que você veja como suas ações estão mudando vidas.</li>
+          <li><strong>Suporte Personalizado:</strong> Oferecemos recursos e treinamentos para capacitar voluntários, garantindo que todos se sintam preparados e confiantes.</li>
+          <li><strong>Comunidade de Apoio:</strong> Junte-se a uma rede de pessoas como você, motivadas a fazer a diferença e compartilhar experiências enriquecedoras.</li>
+        </ul>
+      </div> -->
+    </section>
+
+    <section class="call-to-action">
+      <h4><strong>Junte-se a Nós e Faça a Diferença!</strong></h4>
+      <p style="color: #004aad">
+        O voluntariado é uma forma poderosa de transformar a sociedade e cultivar empatia. Ao dedicar seu tempo e habilidades, você pode
+        ajudar a construir comunidades mais fortes e unidas.
+        <br />
+        Não importa quanto tempo você tenha disponível, sua contribuição é valiosa e pode mudar vidas.
+      </p>
+      <div class="cta-buttons">
+        <a href="/account/register" class="btn-volunteer">Quero ser Voluntário</a>
+        <a href="/account/register" class="btn-entity">Sou uma Entidade</a>
+      </div>
     </section>
 
     <!-- Footer com informações de contato -->
@@ -74,68 +98,20 @@
 </html>
 
 <style>
-  /* Estilos globais */
-  /* Estilos globais */
-  /* Estilos globais */
   body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
-  }
-
-  header {
-    background-color: #00796b;
-    color: white;
-    padding: 15px;
-    text-align: center;
-  }
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-  }
-
-  .navbar ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-
-  .navbar ul li {
-    margin-right: 20px;
-  }
-
-  .navbar ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  /* Tornando o menu de navegação responsivo */
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-    }
-    .navbar ul {
-      flex-direction: column;
-      align-items: center;
-    }
-    .navbar ul li {
-      margin: 10px 0;
-    }
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Hanken Grotesk';
   }
 
   /* Seção hero */
   .hero {
-    background: url('../../content/images/Conexão2.gif');
+    background: url('../../content/images/Conexão1.gif');
     background-size: cover;
     background-position: center;
-    padding: 250px 20px;
+    padding: 258px 20px;
     text-align: center;
   }
 
@@ -151,40 +127,24 @@
     margin: 0 auto;
   }
 
-  .hero h2 {
+  .hero1 h2 {
     font-size: 2.5rem;
   }
 
-  .hero p {
-    font-size: 1.2rem;
+  .hero1 p {
+    font-size: 1rem;
   }
 
   .cta-buttons {
     margin-top: 20px;
   }
 
-  .btn-volunteer,
-  .btn-entity {
-    background-color: #00796b;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-
-  .btn-volunteer:hover,
-  .btn-entity:hover {
-    background-color: #004d40;
-  }
-
   /* Responsividade para a seção hero */
   @media (max-width: 768px) {
-    .hero h2 {
+    .hero1 h2 {
       font-size: 1.8rem;
     }
-    .hero p {
+    .hero1 p {
       font-size: 1rem;
     }
     .cta-buttons {
@@ -200,49 +160,176 @@
 
   .how-it-works h3 {
     margin-bottom: 40px;
+    font-size: 2rem;
+    color: #004aad;
   }
 
-  .steps {
+  .cards-container {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
-  .step {
-    max-width: 250px;
+  .card {
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    opacity: 1; /* Definido como invisível inicialmente */
+    transform: translateY(30px); /* Ligeiro deslocamento */
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+    cursor: pointer;
   }
 
+  .card i {
+    font-size: 3rem;
+    color: #004aad;
+    margin-bottom: 15px;
+  }
+
+  .card h4 {
+    font-size: 1.5rem;
+    color: #004aad;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 1rem;
+    color: #000000;
+  }
+
+  /* Efeito ao passar o mouse */
+  .card:hover {
+    background-color: #c7e9ff;
+    transform: translateY(-10px);
+  }
+
+  /* Responsividade */
   @media (max-width: 768px) {
-    .steps {
+    .cards-container {
       flex-direction: column;
       align-items: center;
     }
-    .step {
-      margin-bottom: 20px;
+
+    .card {
+      padding: 30px;
     }
+  }
+
+  /* Classes para animação */
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0); /* Volta à posição original */
   }
 
   /* Seção sobre */
   .about {
-    background-color: #e0f7fa;
-    padding: 50px 20px;
+    background-color: #c7e9ff;
+    padding: 50px 30px;
+    margin: 20px auto;
     text-align: center;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .about h3 {
+    font-size: 3.5rem;
+    color: #004aad;
     margin-bottom: 20px;
+  }
+
+  .about p {
+    font-size: 1.4rem;
+    color: #000000;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .gif-container {
+    margin: 30px 0;
+    border-radius: 10px;
+    overflow: hidden; /* Para garantir que as bordas arredondadas funcionem */
+  }
+
+  .gif-container img {
+    width: 100%; /* Faz o GIF preencher a largura do contêiner */
+    border-radius: 10px; /* Bordas arredondadas no GIF */
+  }
+
+  .differences {
+    text-align: left;
+    margin-top: 30px;
+  }
+
+  .differences h4 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #0077cc;
+  }
+
+  .differences ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .differences ul li {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #333;
+  }
+
+  .call-to-action {
+    padding: 50px 30px;
+    margin-top: 40px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .call-to-action h4 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #004aad;
+  }
+
+  .call-to-action p {
+    font-size: 1.2rem;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+
+  .cta-buttons a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #004aad;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-buttons a:hover {
+    background-color: #0069fb;
   }
 
   /* Footer */
   .footer-content {
-    background-color: #004d40;
+    background-color: #004aad;
     color: white;
     text-align: center;
     padding: 20px;
+    margin: -12px;
   }
 
   .footer-content ul {
     list-style: none;
-    padding: 0;
+    padding: 20;
   }
 
   .footer-content ul li {
@@ -261,7 +348,7 @@
 
   /* Responsividade geral */
   @media (max-width: 600px) {
-    .hero-content {
+    .hero1-content {
       padding: 10px;
     }
 
@@ -275,12 +362,12 @@
       font-size: 1rem;
     }
 
-    .hero h2 {
+    .hero1 h2 {
       font-size: 1.5rem;
     }
 
-    .hero p {
-      font-size: 0.9rem;
+    .hero1 p {
+      font-size: 1rem;
     }
   }
 </style>
