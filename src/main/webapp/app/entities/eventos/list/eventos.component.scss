@@ -1,0 +1,96 @@
+.event-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards por linha */
+  gap: 32px; /* Aumente o espaço entre os cards (ex: 32px) */
+  max-width: 1300px; /* Largura máxima do container */
+  margin: 0 auto; /* Centraliza o container na página */
+}
+
+.event-card {
+  width: 300px; /* Largura fixa dos cards */
+  height: 400px; /* Altura fixa dos cards */
+  box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
+  padding: 16px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribui o conteúdo dentro do card */
+  overflow: hidden; /* Previne que o conteúdo transborde */
+  margin-bottom: 16px; /* Adiciona um espaço inferior aos cards */
+}
+
+.event-image {
+  width: 100%;
+  height: 150px; /* Altura da imagem */
+  object-fit: cover; /* Mantém a proporção da imagem */
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.event-description {
+  flex-grow: 1;
+  margin: 16px 0;
+  font-size: 1rem;
+  color: #666;
+  overflow: hidden; /* Impede que o texto exceda o espaço disponível */
+  text-overflow: ellipsis; /* Adiciona "..." caso o texto seja muito longo */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita a 3 linhas */
+  -webkit-box-orient: vertical;
+}
+
+.event-button {
+  width: 100%;
+  background-color: white;
+  color: #004aad;
+  border-radius: 4px;
+  padding: 10px;
+  border: solid 1px #004aad;
+  cursor: pointer;
+  text-align: center;
+}
+
+.event-button:hover {
+  background-color: #004aad;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Estilos responsivos */
+@media (max-width: 1200px) {
+  .event-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajuste para telas menores */
+  }
+}
+
+@media (max-width: 900px) {
+  .event-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste para telas menores */
+  }
+}
+
+@media (max-width: 600px) {
+  .event-container {
+    grid-template-columns: 1fr; /* Apenas 1 card por linha em dispositivos pequenos */
+  }
+}
+
+.alert {
+  color: #004aad;
+  margin: 40px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert span {
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
+  display: block;
+}

@@ -22,6 +22,7 @@ import { CustomDateTimePipe } from 'app/shared/date/custom-date-time.pipe';
   standalone: true,
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
+  styleUrl: './eventos.component.scss',
   imports: [
     RouterModule,
     FormsModule,
@@ -66,6 +67,14 @@ export class EventosComponent implements OnInit {
       .subscribe();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
+  }
+
+  Inscrever(): void {
+    console.warn('teste btn inscrever-se');
+  }
+
+  VisualizarCandidatos(): void {
+    console.warn('teste btn visualizar candidatos');
   }
 
   delete(eventos: IEventos): void {
