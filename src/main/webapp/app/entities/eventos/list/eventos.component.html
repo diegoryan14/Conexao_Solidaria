@@ -37,27 +37,40 @@
   }
 
   @if (eventos && eventos.length > 0) {
-    <div class="event-container">
-      <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
-        <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
-        <h3>{{ evento.nome }}</h3>
-        <p class="event-description">{{ evento.observacao }}</p>
-        <p-footer>
-          <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button" (click)="Inscrever()"></button>
-        </p-footer>
+    <div *ngIf="user?.tipoUser === null">Nenhum Evento encontrado</div>
+
+    <div *ngIf="user?.tipoUser === 'COLABORADOR'">
+      <div class="event-container">
+        <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
+          <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
+          <h3>{{ evento.nome }}</h3>
+          <p class="event-description">{{ evento.observacao }}</p>
+          <p-footer>
+            <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button" (click)="Inscrever()"></button>
+          </p-footer>
+        </div>
       </div>
     </div>
 
-    <!-- <div class="event-container">
-      <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
-        <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento">
-        <h3>{{ evento.nome }}</h3>
-        <p class="event-description">{{ evento.observacao }}</p>
-        <p-footer>
-          <button pButton type="button" label="Visualizar candidatos" icon="pi pi-eye" class="event-button" (click)="VisualizarCandidatos()"></button>
-        </p-footer>
+    <div *ngIf="user?.tipoUser === 'ENTIDADE'">
+      <div class="event-container">
+        <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
+          <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
+          <h3>{{ evento.nome }}</h3>
+          <p class="event-description">{{ evento.observacao }}</p>
+          <p-footer>
+            <button
+              pButton
+              type="button"
+              label="Visualizar candidatos"
+              icon="pi pi-eye"
+              class="event-button"
+              (click)="VisualizarCandidatos()"
+            ></button>
+          </p-footer>
+        </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- <div class="event-container">
       <p-card *ngFor="let evento of eventos; trackBy: trackId" header="{{evento.nome}}" styleClass="event-card">
@@ -67,53 +80,6 @@
           <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button"></button>
         </p-footer>
       </p-card>
-    </div> -->
-
-    <!-- <div class="table-responsive table-entities" id="entities">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" appSortBy="id">Código</th>
-            <th scope="col" appSortBy="nome">Nome</th>
-            <th scope="col" appSortBy="dataCadastro">Data Cadastro</th>
-            <th scope="col" appSortBy="dataEvento">Data Evento</th>
-            <th scope="col" appSortBy="horaInicio">Hora Inicio</th>
-            <th scope="col" appSortBy="horaTermino">Hora Termino</th>
-            <th scope="col" appSortBy="observacao">Observação</th>
-            <th scope="col" appSortBy="user.login">Usuário</th>
-            <th scope="col" class="text-center">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (eventos of eventos; track trackId) {
-            <tr data-cy="entityTable">
-              <td>
-                <a [routerLink]="['/eventos', eventos.id, 'view']">{{ eventos.id }}</a>
-              </td>
-              <td>{{ eventos.nome }}</td>
-              <td>{{ eventos.dataCadastro | formatMediumDatetime }}</td>
-              <td>{{ eventos.dataEvento | customDateTime }}</td>
-              <td>{{ eventos.horaInicio }}</td>
-              <td>{{ eventos.horaTermino }}</td>
-              <td>{{ eventos.observacao }}</td>
-              <td>{{ eventos.user?.login }}</td>
-              <td class="text-center">
-                <div class="btn-group">
-                  <a [routerLink]="['/eventos', eventos.id, 'view']" class="btn btn-info btn-sm">
-                    <fa-icon icon="eye"></fa-icon> Visualizar
-                  </a>
-                  <a [routerLink]="['/eventos', eventos.id, 'edit']" class="btn btn-primary btn-sm">
-                    <fa-icon icon="pencil-alt"></fa-icon> Editar
-                  </a>
-                  <button type="submit" (click)="delete(eventos)" class="btn btn-danger btn-sm">
-                    <fa-icon icon="times"></fa-icon> Excluir
-                  </button>
-                </div>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
     </div> -->
   }
 

@@ -14,20 +14,10 @@
           <div class="login-side">
             <div class="card-login">
               <form class="form-login" [formGroup]="registerForm">
-                <!-- Seleciona usuario ou entidade -->
-                <div>
-                  <label for="type"
-                    >Tipo de Cadastro
-                    <select formControlName="type" (change)="registerForm.get('type')?.value === 'user' ? newUser() : newEntity()">
-                      <option value="user">Usuário</option>
-                      <option value="entity">Entidade</option>
-                    </select>
-                  </label>
-                </div>
                 <!-- Voluntario -->
                 <div *ngIf="UserOrEntity">
                   <div class="input-login">
-                    <label for="login">Usuário</label>
+                    <label for="login">Colaborador</label>
                     <input type="text" maxlength="50" placeholder="Digite seu usuário" formControlName="login" data-cy="login" pInputText />
                     <ng-container
                       *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
@@ -118,6 +108,11 @@
                         >A confirmação da senha não pode ter mais de 50 caracteres.</small
                       >
                     </ng-container>
+                  </div>
+
+                  <div style="margin-top: 10px; color: rgb(0, 176, 235); font-size: 20px">
+                    <span>Criar uma conta como </span>
+                    <a class="alert-link" (click)="newEntity()">Entidade</a>
                   </div>
                 </div>
                 <!-- Entidade -->
@@ -221,6 +216,11 @@
                         >A confirmação da senha não pode ter mais de 50 caracteres.</small
                       >
                     </ng-container>
+                  </div>
+
+                  <div style="margin-top: 10px; color: rgb(0, 176, 235); font-size: 20px">
+                    <span>Criar uma conta como </span>
+                    <a class="alert-link" (click)="newUser()">Colaborador</a>
                   </div>
                 </div>
 

@@ -17,6 +17,7 @@ import { IEventos } from '../eventos.model';
 import { EntityArrayResponseType, EventosService } from '../service/eventos.service';
 import { EventosDeleteDialogComponent } from '../delete/eventos-delete-dialog.component';
 import { CustomDateTimePipe } from 'app/shared/date/custom-date-time.pipe';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   standalone: true,
@@ -48,10 +49,12 @@ export class EventosComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  user: any = null;
 
   public router = inject(Router);
   protected eventosService = inject(EventosService);
   protected activatedRoute = inject(ActivatedRoute);
+  protected accountService = inject(AccountService);
   protected sortService = inject(SortService);
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
@@ -65,6 +68,12 @@ export class EventosComponent implements OnInit {
         tap(() => this.load()),
       )
       .subscribe();
+
+    // Obtendo dados do usuário logado
+    this.accountService.identity().subscribe(account => {
+      this.user = account;
+      console.warn('Usuário logado:', this.user);
+    });
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
   }
