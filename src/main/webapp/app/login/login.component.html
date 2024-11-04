@@ -3,7 +3,9 @@
     <div class="background-img">
       <!-- Imagem de fundo -->
     </div>
+
     <div class="card-login">
+      <div *ngIf="authenticationError()" class="alert alert-danger">Nome de usuário ou senha incorretos. Tente novamente.</div>
       <form [formGroup]="loginForm" class="form-login">
         <div class="input-group">
           <label for="username">Usuário</label>

@@ -1,82 +1,157 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
+<body class="ImgFundo">
+  <div class="d-flex justify-content-center">
+    <div class="col-8">
+      <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <!-- <h2
         id="app-inscricao-heading"
         data-cy="InscricaoCreateUpdateHeading"
         appTranslate="conexaoSolidariaApp.inscricao.home.createOrEditLabel"
       >
-        Criar ou editar Inscricao
-      </h2>
+      </h2> -->
 
-      <div>
-        <app-alert-error></app-alert-error>
+        <div>
+          <app-alert-error></app-alert-error>
 
-        @if (editForm.controls.id.value !== null) {
+          @if (editForm.controls.id.value !== null) {
+            <div class="mb-3">
+              <label class="form-label" for="field_id" appTranslate="conexaoSolidariaApp.inscricao.id">ID</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
+          }
+
           <div class="mb-3">
-            <label class="form-label" for="field_id" appTranslate="conexaoSolidariaApp.inscricao.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label class="form-label" for="field_data" appTranslate="conexaoSolidariaApp.inscricao.data">Data</label>
+            <div class="d-flex">
+              <input
+                id="field_data"
+                data-cy="data"
+                type="datetime-local"
+                class="form-control"
+                name="data"
+                formControlName="data"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+            </div>
           </div>
-        }
 
-        <div class="mb-3">
-          <label class="form-label" for="field_data" appTranslate="conexaoSolidariaApp.inscricao.data">Data</label>
-          <div class="d-flex">
-            <input
-              id="field_data"
-              data-cy="data"
-              type="datetime-local"
+          <div class="mb-3">
+            <label class="form-label" for="field_user" appTranslate="conexaoSolidariaApp.inscricao.user">User</label>
+            <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+              <option [ngValue]="null"></option>
+              @for (userOption of usersSharedCollection; track $index) {
+                <option [ngValue]="userOption">{{ userOption.login }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="field_evento" appTranslate="conexaoSolidariaApp.inscricao.evento">Evento</label>
+            <select
               class="form-control"
-              name="data"
-              formControlName="data"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
+              id="field_evento"
+              data-cy="evento"
+              name="evento"
+              formControlName="evento"
+              [compareWith]="compareEventos"
+            >
+              <option [ngValue]="null"></option>
+              @for (eventosOption of eventosSharedCollection; track $index) {
+                <option [ngValue]="eventosOption">{{ eventosOption.nome }}</option>
+              }
+            </select>
           </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label" for="field_user" appTranslate="conexaoSolidariaApp.inscricao.user">User</label>
-          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
-            <option [ngValue]="null"></option>
-            @for (userOption of usersSharedCollection; track $index) {
-              <option [ngValue]="userOption">{{ userOption.login }}</option>
-            }
-          </select>
-        </div>
+        <div>
+          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancelar</span>
+          </button>
 
-        <div class="mb-3">
-          <label class="form-label" for="field_evento" appTranslate="conexaoSolidariaApp.inscricao.evento">Evento</label>
-          <select
-            class="form-control"
-            id="field_evento"
-            data-cy="evento"
-            name="evento"
-            formControlName="evento"
-            [compareWith]="compareEventos"
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            [disabled]="editForm.invalid || isSaving"
+            class="btn btn-primary"
           >
-            <option [ngValue]="null"></option>
-            @for (eventosOption of eventosSharedCollection; track $index) {
-              <option [ngValue]="eventosOption">{{ eventosOption.nome }}</option>
-            }
-          </select>
+            <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Salvar</span>
+          </button>
         </div>
-      </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancelar</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Salvar</span>
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
+</body>
+
+<style>
+  .ImgFundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #c7e9ff;
+    z-index: -1;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #000000;
+    text-align: center;
+    margin-top: 5%;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-secondary {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .col-8 {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 160px;
+  }
+</style>

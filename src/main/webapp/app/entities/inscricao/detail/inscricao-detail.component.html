@@ -1,46 +1,148 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    @if (inscricao()) {
-      <div>
-        <h2 data-cy="inscricaoDetailsHeading"><span appTranslate="conexaoSolidariaApp.inscricao.detail.title">Inscricao</span></h2>
+<body class="ImgFundo">
+  <div class="d-flex justify-content-center">
+    <div class="col-8">
+      @if (inscricao()) {
+        <div>
+          <h2 data-cy="inscricaoDetailsHeading"><span appTranslate="conexaoSolidariaApp.inscricao.detail.title">Inscricao</span></h2>
 
-        <hr />
+          <hr />
 
-        <app-alert-error></app-alert-error>
+          <app-alert-error></app-alert-error>
 
-        <app-alert></app-alert>
+          <app-alert></app-alert>
 
-        <dl class="row-md jh-entity-details">
-          <dt><span appTranslate="global.field.id">Código</span></dt>
-          <dd>
-            <span>{{ inscricao()!.id }}</span>
-          </dd>
-          <dt><span appTranslate="conexaoSolidariaApp.inscricao.data">Data</span></dt>
-          <dd>
-            <span>{{ inscricao()!.data | formatMediumDatetime }}</span>
-          </dd>
-          <dt><span appTranslate="conexaoSolidariaApp.inscricao.user">User</span></dt>
-          <dd>
-            <span>{{ inscricao()!.user?.login }}</span>
-          </dd>
-          <dt><span appTranslate="conexaoSolidariaApp.inscricao.evento">Evento</span></dt>
-          <dd>
-            @if (inscricao()!.evento) {
-              <div>
-                <a [routerLink]="['/eventos', inscricao()!.evento?.id, 'view']">{{ inscricao()!.evento?.nome }}</a>
-              </div>
-            }
-          </dd>
-        </dl>
+          <dl class="row-md jh-entity-details">
+            <dt><span appTranslate="global.field.id">Código</span></dt>
+            <dd>
+              <span>{{ inscricao()!.id }}</span>
+            </dd>
+            <dt><span appTranslate="conexaoSolidariaApp.inscricao.data">Data</span></dt>
+            <dd>
+              <span>{{ inscricao()!.data | formatMediumDatetime }}</span>
+            </dd>
+            <dt><span appTranslate="conexaoSolidariaApp.inscricao.user">User</span></dt>
+            <dd>
+              <span>{{ inscricao()!.user?.login }}</span>
+            </dd>
+            <dt><span appTranslate="conexaoSolidariaApp.inscricao.evento">Evento</span></dt>
+            <dd>
+              @if (inscricao()!.evento) {
+                <div>
+                  <a [routerLink]="['/eventos', inscricao()!.evento?.id, 'view']">{{ inscricao()!.evento?.nome }}</a>
+                </div>
+              }
+            </dd>
+          </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Voltar</span>
-        </button>
+          <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Voltar</span>
+          </button>
 
-        <button type="button" [routerLink]="['/inscricao', inscricao()!.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Editar</span>
-        </button>
-      </div>
-    }
+          <button type="button" [routerLink]="['/inscricao', inscricao()!.id, 'edit']" class="btn btn-primary">
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Editar</span>
+          </button>
+        </div>
+      }
+    </div>
   </div>
-</div>
+</body>
+
+<style>
+  .ImgFundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #c7e9ff;
+    z-index: -1;
+  }
+  /* Container principal para detalhes da inscrição */
+  .d-flex {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .col-8 {
+    background-color: #2687aa;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+  }
+
+  /* Estilo do título */
+  h2[data-cy='inscricaoDetailsHeading'] {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  /* Linha divisória estilizada */
+  hr {
+    border: 1px solid #000000;
+    margin-bottom: 20px;
+  }
+
+  /* Detalhes de inscrição */
+  dt {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  dd {
+    margin-bottom: 15px;
+    color: #000000;
+    font-size: 16px;
+  }
+
+  /* Links para eventos */
+  .jh-entity-details a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .jh-entity-details a:hover {
+    color: #1e6a8c;
+    text-decoration: underline;
+  }
+
+  /* Botões */
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    transition:
+      background-color 0.3s,
+      transform 0.2s;
+  }
+
+  .btn-info {
+    background-color: #7f8c8d;
+    border: none;
+  }
+
+  .btn-info:hover {
+    background-color: #606c76;
+    transform: scale(1.05);
+  }
+
+  .btn-primary {
+    background-color: #2980b9;
+    border: none;
+    margin-left: 10px;
+  }
+
+  .btn-primary:hover {
+    background-color: #1e6a8c;
+    transform: scale(1.05);
+  }
+</style>

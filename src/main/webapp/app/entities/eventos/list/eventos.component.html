@@ -1,102 +1,252 @@
-<div class="eventos-container">
-  <h2
-    id="page-heading"
-    data-cy="EventosHeading"
-    class="text-center"
-    style="margin-bottom: 50px; font-weight: bold; text-overflow: ellipsis"
-  >
-    <!-- <span appTranslate="conexaoSolidariaApp.eventos.home.title">Eventos</span> -->
+<body class="ImgFundo">
+  <div class="eventos-container">
+    <h2
+      id="page-heading"
+      data-cy="EventosHeading"
+      class="text-center"
+      style="margin-bottom: 50px; margin-left: 200px; font-weight: bold; text-overflow: ellipsis"
+    >
+      <span style="font-size: 38px">Visualizar Eventos </span>
+    </h2>
 
-    <!-- <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="conexaoSolidariaApp.eventos.home.refreshListLabel">Atualizar lista</span>
-      </button>
+    <app-alert-error></app-alert-error>
+    <app-alert></app-alert>
+    <app-filter [filters]="filters"></app-filter>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-eventos"
-        [routerLink]="['/eventos/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="conexaoSolidariaApp.eventos.home.createLabel">Criar novo Evento</span>
-      </button>
-    </div> -->
-    <span>Visualizar Eventos</span>
-  </h2>
+    @if (eventos?.length === 0) {
+      <div class="alert text-center" id="no-result">
+        <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
+      </div>
+    }
 
-  <app-alert-error></app-alert-error>
-  <app-alert></app-alert>
-  <app-filter [filters]="filters"></app-filter>
+    @if (eventos && eventos.length > 0) {
+      <div *ngIf="user?.tipoUser === null">Nenhum Evento encontrado</div>
 
-  @if (eventos?.length === 0) {
-    <div class="alert text-center" id="no-result">
-      <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
-    </div>
-  }
-
-  @if (eventos && eventos.length > 0) {
-    <div *ngIf="user?.tipoUser === null">Nenhum Evento encontrado</div>
-
-    <div *ngIf="user?.tipoUser === 'COLABORADOR'">
-      <div class="event-container">
-        <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
-          <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
-          <h3>{{ evento.nome }}</h3>
-          <p class="event-description">{{ evento.observacao }}</p>
-          <p-footer>
-            <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button" (click)="Inscrever()"></button>
-          </p-footer>
+      <div *ngIf="user?.tipoUser === 'COLABORADOR'">
+        <div class="event-container">
+          <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
+            <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
+            <h3>{{ evento.nome }}</h3>
+            <p class="event-description">{{ evento.observacao }}</p>
+            <p-footer>
+              <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button" (click)="Inscrever()"></button>
+            </p-footer>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div *ngIf="user?.tipoUser === 'ENTIDADE'">
-      <div class="event-container">
-        <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
-          <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
-          <h3>{{ evento.nome }}</h3>
-          <p class="event-description">{{ evento.observacao }}</p>
-          <p-footer>
-            <button
-              pButton
-              type="button"
-              label="Visualizar candidatos"
-              icon="pi pi-eye"
-              class="event-button"
-              (click)="VisualizarCandidatos()"
-            ></button>
-          </p-footer>
+      <div *ngIf="user?.tipoUser === 'ENTIDADE'">
+        <div class="eventos-container">
+          <h2 id="page-heading" data-cy="EventosHeading">
+            <div class="d-flex justify-content-end mb-3">
+              <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+                <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+                <span appTranslate="conexaoSolidariaApp.eventos.home.refreshListLabel">Atualizar lista</span>
+              </button>
+              <button
+                id="jh-create-entity"
+                data-cy="entityCreateButton"
+                class="btn btn-primary jh-create-entity create-eventos"
+                [routerLink]="['/eventos/new']"
+              >
+                <fa-icon icon="plus"></fa-icon>
+                <span appTranslate="conexaoSolidariaApp.eventos.home.createLabel">Criar novo Evento</span>
+              </button>
+            </div>
+          </h2>
+
+          <app-alert-error></app-alert-error>
+          <app-alert></app-alert>
+          <app-filter [filters]="filters"></app-filter>
+
+          <div *ngIf="eventos?.length === 0" class="alert alert-warning text-center" id="no-result">
+            <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
+          </div>
+
+          <div *ngIf="eventos && eventos.length > 0" class="card-container">
+            <div class="row">
+              <div *ngFor="let evento of eventos; trackBy: trackId" class="col-md-4 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ evento.nome }}</h5>
+                    <div class="card-text">
+                      <p><strong>Código:</strong> {{ evento.id }}</p>
+                      <p><strong>Data Cadastro:</strong> {{ evento.dataCadastro | formatMediumDatetime }}</p>
+                      <p><strong>Data Evento:</strong> {{ evento.dataEvento | customDateTime }}</p>
+                      <p><strong>Hora Início:</strong> {{ evento.horaInicio }}</p>
+                      <p><strong>Hora Término:</strong> {{ evento.horaTermino }}</p>
+                      <p><strong>Observação:</strong> {{ evento.observacao }}</p>
+                      <p><strong>Usuário:</strong> {{ evento.user?.login }}</p>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <a [routerLink]="['/eventos', evento.id, 'view']" class="btn btn-info btn-sm">
+                      <fa-icon icon="eye"></fa-icon> Visualizar
+                    </a>
+                    <a [routerLink]="['/eventos', evento.id, 'edit']" class="btn btn-primary btn-sm">
+                      <fa-icon icon="pencil-alt"></fa-icon> Editar
+                    </a>
+                    <button type="button" (click)="delete(evento)" class="btn btn-danger btn-sm">
+                      <fa-icon icon="times"></fa-icon> Excluir
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div *ngIf="eventos && eventos.length > 0" class="d-flex justify-content-center mt-3">
+            <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [page]="page"
+              [pageSize]="itemsPerPage"
+              [maxSize]="5"
+              [rotate]="true"
+              [boundaryLinks]="true"
+              (pageChange)="navigateToPage($event)"
+            ></ngb-pagination>
+          </div> -->
         </div>
       </div>
-    </div>
 
-    <!-- <div class="event-container">
-      <p-card *ngFor="let evento of eventos; trackBy: trackId" header="{{evento.nome}}" styleClass="event-card">
-        <img src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" class="event-image" />
-        <div class="event-description">{{ evento?.observacao }}</div>
-        <p-footer>
-          <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button"></button>
-        </p-footer>
-      </p-card>
-    </div> -->
+      <!-- <div class="event-container">
+        <p-card *ngFor="let evento of eventos; trackBy: trackId" header="{{evento.nome}}" styleClass="event-card">
+          <img src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" class="event-image" />
+          <div class="event-description">{{ evento?.observacao }}</div>
+          <p-footer>
+            <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button"></button>
+          </p-footer>
+        </p-card>
+      </div> -->
+    }
+
+    <!-- @if (eventos && eventos.length > 0) {
+      <div class="pagination-container">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    } -->
+  </div>
+</body>
+
+<style>
+  #page-heading {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #000;
+    margin-bottom: 30px;
+    margin-right: 170px;
   }
 
-  <!-- @if (eventos && eventos.length > 0) {
-    <div class="pagination-container">
-      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [page]="page"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="navigateToPage($event)"
-      ></ngb-pagination>
-    </div>
-  } -->
-</div>
+  .event-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 10px;
+  }
 
-<style></style>
+  .event-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+    background-color: #fff;
+    padding: 16px;
+  }
+
+  .event-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .event-description {
+    font-size: 0.9rem;
+    color: #000000;
+    margin: 8px 0;
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .event-button {
+    margin-top: auto;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .card {
+    background-color: #c7e9ff;
+    border: 1px solid #e0e0e0;
+    margin-left: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+    color: #000000;
+  }
+
+  .card-text p {
+    margin: 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .card-text p:last-child {
+    border-bottom: none;
+  }
+
+  .card-footer {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-sm {
+    padding: 5px 10px;
+  }
+</style>
