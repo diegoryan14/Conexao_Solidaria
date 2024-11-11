@@ -36,6 +36,25 @@
                   </div>
 
                   <div class="input-login">
+                    <label for="login">Cpf</label>
+                    <input type="text" maxlength="14" placeholder="Digite seu cpf" formControlName="cpf" data-cy="cpf" pInputText />
+                    <!-- <ng-container
+                      *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
+                    >
+                      <small *ngIf="registerForm.get('login')?.errors?.required" class="form-text text-danger"
+                        >O usuário é obrigatório.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.minlength" class="form-text text-danger"
+                        >O usuário deve ter pelo menos 1 caractere.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.maxlength" class="form-text text-danger"
+                        >O usuário não pode ter mais de 50 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.pattern" class="form-text text-danger">O usuário é inválido.</small>
+                    </ng-container> -->
+                  </div>
+
+                  <div class="input-login">
                     <label for="email">Email</label>
                     <input type="text" maxlength="50" placeholder="Digite seu e-mail" formControlName="email" data-cy="email" pInputText />
                     <ng-container
@@ -141,6 +160,25 @@
                       >
                       <small *ngIf="registerForm.get('login')?.errors?.pattern" class="form-text text-danger">A entidade é inválida.</small>
                     </ng-container>
+                  </div>
+
+                  <div class="input-login">
+                    <label for="login">Cnpj</label>
+                    <input type="text" maxlength="14" placeholder="Digite seu cnpj" formControlName="cnpj" data-cy="cnpj" pInputText />
+                    <!-- <ng-container
+                      *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
+                    >
+                      <small *ngIf="registerForm.get('login')?.errors?.required" class="form-text text-danger"
+                        >O usuário é obrigatório.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.minlength" class="form-text text-danger"
+                        >O usuário deve ter pelo menos 1 caractere.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.maxlength" class="form-text text-danger"
+                        >O usuário não pode ter mais de 50 caracteres.</small
+                      >
+                      <small *ngIf="registerForm.get('login')?.errors?.pattern" class="form-text text-danger">O usuário é inválido.</small>
+                    </ng-container> -->
                   </div>
 
                   <div class="input-login">

@@ -50,6 +50,7 @@ export class EventosComponent implements OnInit {
   totalItems = 0;
   page = 1;
   user: any = null;
+  showModal: boolean = false;
 
   public router = inject(Router);
   protected eventosService = inject(EventosService);
@@ -80,6 +81,11 @@ export class EventosComponent implements OnInit {
 
   Inscrever(): void {
     console.warn('teste btn inscrever-se');
+    this.showModal = true;
+  }
+
+  confirmarInscricao(): void {
+    this.showModal = false;
   }
 
   VisualizarCandidatos(): void {

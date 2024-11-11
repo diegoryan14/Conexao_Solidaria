@@ -33,6 +33,16 @@
             </p-footer>
           </div>
         </div>
+        <!-- Modal de confirmação de inscrição -->
+        <p-dialog [(visible)]="showModal" [modal]="true" header="Confirmação de Inscrição" [closable]="false" [style]="{ width: '400px' }">
+          <p>Tem certeza de que deseja se inscrever neste evento?</p>
+
+          <!-- Botões de confirmação e cancelamento -->
+          <div class="ui-dialog-footer" style="text-align: right">
+            <button pButton type="button" label="Sim" icon="pi pi-check" (click)="confirmarInscricao()"></button>
+            <button pButton type="button" label="Não" icon="pi pi-times" (click)="showModal = false" class="p-button-secondary"></button>
+          </div>
+        </p-dialog>
       </div>
 
       <div *ngIf="user?.tipoUser === 'ENTIDADE'">
