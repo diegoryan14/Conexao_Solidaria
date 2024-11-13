@@ -5,9 +5,22 @@
       data-cy="EventosHeading"
       class="text-center"
       style="margin-bottom: 50px; margin-left: 200px; font-weight: bold; text-overflow: ellipsis"
-    >
-      <span style="font-size: 38px">Visualizar Eventos </span>
-    </h2>
+    ></h2>
+
+    <div class="search-bar-container">
+      <input type="text" placeholder="Pesquisar eventos..." [(ngModel)]="searchTerm" class="search-bar" />
+      <button type="button" class="btn-search" (click)="filterEvents()">
+        <fa-icon icon="search"></fa-icon>
+      </button>
+    </div>
+
+    <app-alert-error></app-alert-error>
+    <app-alert></app-alert>
+    <app-filter [filters]="filters"></app-filter>
+
+    <div *ngIf="eventos?.length === 0" class="alert alert-warning text-center" id="no-result">
+      <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
+    </div>
 
     <app-alert-error></app-alert-error>
     <app-alert></app-alert>
@@ -23,13 +36,28 @@
       <div *ngIf="user?.tipoUser === null">Nenhum Evento encontrado</div>
 
       <div *ngIf="user?.tipoUser === 'COLABORADOR'">
+        <h2 id="page-heading" data-cy="EventosHeading">
+          <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+              <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+              <span appTranslate="conexaoSolidariaApp.eventos.home.refreshListLabel">Atualizar lista</span>
+            </button>
+          </div>
+        </h2>
         <div class="event-container">
-          <div class="event-card" *ngFor="let evento of eventos; trackBy: trackId">
+          <div class="event-card" *ngFor="let evento of eventos; let i = index; trackBy: trackId">
             <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
             <h3>{{ evento.nome }}</h3>
+            <p class="card-text">
+              <span [ngClass]="evento.isInscrito ? 'text-success' : 'text-muted'">
+                {{ evento.isInscrito ? 'Inscrito nesse evento' : 'Ainda não inscrito' }}
+              </span>
+            </p>
             <p class="event-description">{{ evento.observacao }}</p>
             <p-footer>
-              <button pButton type="button" label="Inscrever-se" icon="pi pi-check" class="event-button" (click)="Inscrever()"></button>
+              <button (click)="Inscrever(i)" [disabled]="evento.isInscrito">
+                {{ evento.isInscrito ? 'Inscrito' : 'Inscrever-se' }}
+              </button>
             </p-footer>
           </div>
         </div>
@@ -149,67 +177,156 @@
 </body>
 
 <style>
-  #page-heading {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    color: #000;
-    margin-bottom: 30px;
-    margin-right: 170px;
+  body {
+    /* background: linear-gradient(135deg, #e0f7fa, #fff3e0); */
+    background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
+    background-attachment: fixed;
+    font-family: 'Arial', sans-serif;
+  }
+  /* Container principal */
+  .eventos-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
   }
 
+  /* Estilo da barra de pesquisa e botões */
+  .search-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .search-bar {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    min-width: 300px;
+  }
+
+  .btn-search {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-search:hover {
+    background-color: #0056b3;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-refresh,
+  .btn-create {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-refresh:hover,
+  .btn-create:hover {
+    background-color: #0056b3;
+  }
+
+  /* Heading */
+  #page-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+    margin-left: 0;
+  }
+
+  /* Container dos eventos */
   .event-container {
     display: grid;
-    gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
     padding: 10px;
   }
 
+  /* Cartão de eventos */
   .event-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s;
-    background-color: #fff;
     padding: 16px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    max-width: 400px; /* Limita a largura máxima do card */
+    width: 100%; /* Faz o card ocupar 100% da largura disponível */
   }
 
   .event-card:hover {
     transform: scale(1.05);
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
+  .event-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Descrição do evento */
   .event-description {
-    font-size: 0.9rem;
-    color: #000000;
+    font-size: 1rem;
+    color: #333;
     margin: 8px 0;
     max-height: 4rem;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
+  /* Botão de inscrição */
   .event-button {
-    margin-top: auto;
-    width: 100%;
     background-color: #007bff;
-    color: #fff;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
   }
 
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  .event-button:hover {
+    background-color: #0056b3;
   }
+
+  /* Cartões de eventos responsivos */
+  /* .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+} */
 
   .card {
     background-color: #c7e9ff;
     border: 1px solid #e0e0e0;
-    margin-left: 200px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 100%;
+    max-width: 400px; /* Limita a largura máxima do card */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -225,22 +342,21 @@
   }
 
   .card-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
     text-align: center;
   }
 
   .card-text {
-    font-size: 0.9rem;
-    color: #000000;
+    font-size: 1rem;
+    color: #333;
   }
 
   .card-text p {
     margin: 0;
     padding: 8px 0;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #ddd;
   }
 
   .card-text p:last-child {
@@ -256,7 +372,48 @@
     gap: 8px;
   }
 
+  /* Botões */
   .btn-sm {
-    padding: 5px 10px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .search-bar-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #page-heading {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      width: 100%;
+    }
+
+    .search-bar {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .event-container {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      margin-left: 0;
+    }
+
+    .btn-search {
+      margin-left: 0;
+    }
+
+    .event-button {
+      padding: 8px;
+    }
   }
 </style>

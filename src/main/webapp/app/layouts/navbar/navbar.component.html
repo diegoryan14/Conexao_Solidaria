@@ -1,8 +1,9 @@
 <nav data-cy="navbar" class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+      <!-- Adicionando a logo -->
+      <img src="../../../content/images/Conexão_3_-removebg-preview.png" alt="Logo" class="logo-img" />
       <!-- <span class="navbar-title" appTranslate="">Conexão Solidária</span> -->
-      <!-- <span class="navbar-version">{{ version }}</span> -->
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -252,73 +253,96 @@
 </nav>
 
 <style>
-  /* Navbar transparente */
+  /* Navbar transparente com efeito gradiente */
   .navbar {
-    background-color: rgba(0, 0, 0, 0); /* Fundo preto com 50% de transparência */
-    padding: 1rem; /* Espaçamento interno */
+    background: linear-gradient(90deg, rgba(0, 74, 173, 0.9) 0%, rgba(92, 186, 230, 0.9) 100%);
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
   .navbar-brand {
     display: flex;
     align-items: center;
-    color: white;
-    font-size: 1.5rem;
+    color: #ffffff;
+    font-size: 1.75rem;
     text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .logo-img {
+    height: 50px; /* Define uma altura maior */
+    width: auto; /* Mantém a proporção da imagem */
+    margin-right: 15px; /* Espaçamento entre a logo e o texto */
   }
 
   .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    background-color: transparent;
+  }
+
+  .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
   }
 
   /* Estilo dos links */
   .navbar-nav .nav-item .nav-link {
-    color: #004aad;
-    font-size: 1rem;
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
   }
 
   /* Cor de hover nos links */
   .navbar-nav .nav-item .nav-link:hover {
-    color: #5cbae6; /* Cor de hover para os links */
+    color: #ffc107;
   }
 
-  /* Cor dos ícones */
-  .navbar-nav .nav-item .fa-icon {
-    color: #5cbae6; /* Cor amarela para os ícones */
+  /* Transição suave para ícones */
+  .navbar-nav .fa-icon {
+    color: #ffffff;
+    transition: color 0.3s ease;
   }
 
-  /* Hover nos ícones */
-  .navbar-nav .nav-item .fa-icon:hover {
-    color: #ffffff; /* Cor branca ao passar o mouse sobre os ícones */
+  .navbar-nav .fa-icon:hover {
+    color: #ffc107;
   }
 
   .dropdown-menu {
-    background-color: #5cbae6; /* Fundo do dropdown mais escuro */
+    background-color: rgba(0, 74, 173, 0.9);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 
   .dropdown-menu .dropdown-item {
-    color: white;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
   }
 
   .dropdown-menu .dropdown-item:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo de hover transparente */
+    background-color: #004aad;
   }
 
-  /* Ajusta ícones dentro do dropdown */
-  .dropdown-menu .fa-icon {
-    color: #5cbae6; /* Cor amarela para ícones no dropdown */
-  }
-
-  .dropdown-menu .fa-icon:hover {
-    color: #ffffff; /* Cor branca ao passar o mouse sobre os ícones no dropdown */
-  }
-
-  .navbar-collapse {
-    justify-content: flex-end;
-  }
-
+  /* Ajuste de imagem de perfil */
   .profile-image {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Animação de clique */
+  .navbar-toggler,
+  .nav-link,
+  .dropdown-item {
+    transition: transform 0.2s;
+  }
+
+  .navbar-toggler:active,
+  .nav-link:active,
+  .dropdown-item:active {
+    transform: scale(0.95);
   }
 </style>

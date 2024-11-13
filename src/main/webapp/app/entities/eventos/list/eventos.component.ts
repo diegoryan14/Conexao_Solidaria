@@ -1,4 +1,4 @@
-import { Component, NgZone, inject, OnInit } from '@angular/core';
+import { Component, NgZone, inject, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { combineLatest, filter, Observable, Subscription, tap } from 'rxjs';
@@ -18,12 +18,13 @@ import { EntityArrayResponseType, EventosService } from '../service/eventos.serv
 import { EventosDeleteDialogComponent } from '../delete/eventos-delete-dialog.component';
 import { CustomDateTimePipe } from 'app/shared/date/custom-date-time.pipe';
 import { AccountService } from 'app/core/auth/account.service';
+import { FilterPipe } from './filter.pipe';
 
 @Component({
   standalone: true,
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
-  styleUrl: './eventos.component.scss',
+  styleUrls: ['./eventos.component.scss'],
   imports: [
     RouterModule,
     FormsModule,
@@ -36,13 +37,15 @@ import { AccountService } from 'app/core/auth/account.service';
     FilterComponent,
     ItemCountComponent,
     CustomDateTimePipe,
+    FilterPipe, // Adicione o pipe aqui
   ],
 })
-export class EventosComponent implements OnInit {
+export class EventosComponent implements OnInit, OnDestroy {
+  searchTerm: string = '';
   subscription: Subscription | null = null;
   eventos?: IEventos[];
   isLoading = false;
-
+  isInscrito: boolean = false; // Propriedade para controlar a inscrição
   sortState = sortStateSignal({});
   filters: IFilterOptions = new FilterOptions();
 
@@ -70,7 +73,6 @@ export class EventosComponent implements OnInit {
       )
       .subscribe();
 
-    // Obtendo dados do usuário logado
     this.accountService.identity().subscribe(account => {
       this.user = account;
       console.warn('Usuário logado:', this.user);
@@ -79,12 +81,19 @@ export class EventosComponent implements OnInit {
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
   }
 
-  Inscrever(): void {
-    console.warn('teste btn inscrever-se');
-    this.showModal = true;
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe(); // Descartando a assinatura para evitar vazamento de memória
+  }
+
+  Inscrever(index: number): void {
+    if (this.eventos) {
+      this.eventos[index].isInscrito = true; // Marca apenas o evento selecionado como inscrito
+      console.warn(`Inscrição confirmada para: ${this.eventos[index].nome}`);
+    }
   }
 
   confirmarInscricao(): void {
+    this.isInscrito = true; // Atualiza o status de inscrição
     this.showModal = false;
   }
 
@@ -95,13 +104,21 @@ export class EventosComponent implements OnInit {
   delete(eventos: IEventos): void {
     const modalRef = this.modalService.open(EventosDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.eventos = eventos;
-    // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
         filter(reason => reason === ITEM_DELETED_EVENT),
         tap(() => this.load()),
       )
       .subscribe();
+  }
+
+  filterEvents(): void {
+    if (this.eventos) {
+      this.eventos = this.eventos.filter(
+        evento =>
+          evento && evento.nome && typeof evento.nome === 'string' && evento.nome.toLowerCase().includes(this.searchTerm.toLowerCase()),
+      );
+    }
   }
 
   load(): void {

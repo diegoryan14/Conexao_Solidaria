@@ -9,6 +9,7 @@ export interface IEventos {
   horaInicio?: string | null;
   horaTermino?: string | null;
   observacao?: string | null;
+  isInscrito?: boolean; // Adicione esta linha
   user?: Pick<IUser, 'id' | 'login'> | null;
 }
 
