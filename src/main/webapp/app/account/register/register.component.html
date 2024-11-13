@@ -37,7 +37,7 @@
 
                   <div class="input-login">
                     <label for="login">Cpf</label>
-                    <input type="text" maxlength="14" placeholder="Digite seu cpf" formControlName="cpf" data-cy="cpf" pInputText />
+                    <p-inputMask mask="999.999.999-99" formControlName="cpf" data-cy="cpf" placeholder="Digite seu cpf" />
                     <!-- <ng-container
                       *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
                     >
@@ -164,7 +164,7 @@
 
                   <div class="input-login">
                     <label for="login">Cnpj</label>
-                    <input type="text" maxlength="14" placeholder="Digite seu cnpj" formControlName="cnpj" data-cy="cnpj" pInputText />
+                    <p-inputMask mask="99.999.999/9999-99" formControlName="cnpj" data-cy="cnpj" placeholder="Digite seu cnpj" />
                     <!-- <ng-container
                       *ngIf="registerForm.get('login')?.invalid && (registerForm.get('login')?.dirty || registerForm.get('login')?.touched)"
                     >
