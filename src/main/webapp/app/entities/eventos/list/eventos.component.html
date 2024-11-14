@@ -49,13 +49,13 @@
             <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
             <h3>{{ evento.nome }}</h3>
             <p class="card-text">
-              <span [ngClass]="evento.isInscrito ? 'text-success' : 'text-muted'">
+              <span [ngClass]="evento.isInscrito ? 'text-success' : 'text-danger'">
                 {{ evento.isInscrito ? 'Inscrito nesse evento' : 'Ainda não inscrito' }}
               </span>
             </p>
             <p class="event-description"><span style="font-weight: bold">Data:</span> {{ evento.dataEventFormat }}</p>
             <p class="event-description"><span style="font-weight: bold">Hora Início:</span> {{ evento.horaInicio }}</p>
-            <p class="event-description"><span style="font-weight: bold">Hora Término:</span>Hora Término: {{ evento.horaTermino }}</p>
+            <p class="event-description"><span style="font-weight: bold">Hora Término:</span> {{ evento.horaTermino }}</p>
             <p class="event-description"><span style="font-weight: bold">Função:</span> {{ evento.observacao }}</p>
             <p-footer>
               <button
