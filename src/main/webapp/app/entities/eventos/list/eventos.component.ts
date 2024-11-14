@@ -147,6 +147,11 @@ export class EventosComponent implements OnInit, OnDestroy {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
+    dataFromBody.forEach(e => {
+      if (e.dataEvento) {
+        e.dataEventFormat = e.dataEvento.format('DD/MM/YYYY');
+      }
+    });
     this.eventos = dataFromBody;
   }
 

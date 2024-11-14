@@ -53,7 +53,10 @@
                 {{ evento.isInscrito ? 'Inscrito nesse evento' : 'Ainda não inscrito' }}
               </span>
             </p>
-            <p class="event-description">{{ evento.observacao }}</p>
+            <p class="event-description">Data: {{ evento.dataEventFormat }}</p>
+            <p class="event-description">Hora Início: {{ evento.horaInicio }}</p>
+            <p class="event-description">Hora Término: {{ evento.horaTermino }}</p>
+            <p class="event-description">Função: {{ evento.observacao }}</p>
             <p-footer>
               <button (click)="Inscrever(i)" [disabled]="evento.isInscrito">
                 {{ evento.isInscrito ? 'Inscrito' : 'Inscrever-se' }}
