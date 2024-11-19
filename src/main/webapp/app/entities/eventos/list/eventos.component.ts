@@ -19,6 +19,8 @@ import { EventosDeleteDialogComponent } from '../delete/eventos-delete-dialog.co
 import { CustomDateTimePipe } from 'app/shared/date/custom-date-time.pipe';
 import { AccountService } from 'app/core/auth/account.service';
 import { FilterPipe } from './filter.pipe';
+import { InscricaoService } from 'app/entities/inscricao/service/inscricao.service';
+import { NewInscricao } from 'app/entities/inscricao/inscricao.model';
 
 @Component({
   standalone: true,
@@ -62,6 +64,7 @@ export class EventosComponent implements OnInit, OnDestroy {
   protected sortService = inject(SortService);
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
+  protected inscricaoService = inject(InscricaoService);
 
   trackId = (_index: number, item: IEventos): number => this.eventosService.getEventosIdentifier(item);
 
@@ -85,10 +88,20 @@ export class EventosComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe(); // Descartando a assinatura para evitar vazamento de memória
   }
 
-  Inscrever(index: number): void {
+  Inscrever(index: number, evento: IEventos): void {
     if (this.eventos) {
       this.eventos[index].isInscrito = true; // Marca apenas o evento selecionado como inscrito
       console.warn(`Inscrição confirmada para: ${this.eventos[index].nome}`);
+
+      const inscricao: NewInscricao = {
+        id: null,
+        user: this.user,
+        evento,
+      };
+      this.inscricaoService.create(inscricao).subscribe({
+        next: response => console.warn('Inscrição criada:', response),
+        error: err => console.error('Erro ao criar inscrição:', err),
+      });
     }
   }
 

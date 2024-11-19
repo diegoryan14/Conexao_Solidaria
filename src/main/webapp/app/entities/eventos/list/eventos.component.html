@@ -60,7 +60,7 @@
             <p-footer>
               <button
                 pButton
-                (click)="Inscrever(i)"
+                (click)="Inscrever(i, evento)"
                 [disabled]="evento.isInscrito"
                 [label]="evento.isInscrito ? 'Inscrito' : 'Inscrever-se'"
                 [icon]="evento.isInscrito ? 'pi pi-check' : 'pi pi-plus'"
