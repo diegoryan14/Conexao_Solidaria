@@ -29,6 +29,27 @@
     <app-filter [filters]="filters"></app-filter>
 
     @if (eventos?.length === 0) {
+      <div *ngIf="user?.tipoUser === 'ENTIDADE'">
+        <div class="eventos-container">
+          <h2 id="page-heading" data-cy="EventosHeading">
+            <div class="d-flex justify-content-end mb-3">
+              <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+                <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+                <span appTranslate="conexaoSolidariaApp.eventos.home.refreshListLabel">Atualizar lista</span>
+              </button>
+              <button
+                id="jh-create-entity"
+                data-cy="entityCreateButton"
+                class="btn btn-primary jh-create-entity create-eventos"
+                [routerLink]="['/eventos/new']"
+              >
+                <fa-icon icon="plus"></fa-icon>
+                <span appTranslate="conexaoSolidariaApp.eventos.home.createLabel">Criar novo Evento</span>
+              </button>
+            </div>
+          </h2>
+        </div>
+      </div>
       <div class="alert text-center" id="no-result">
         <span>Nenhum Evento encontrado</span>
       </div>
