@@ -126,6 +126,9 @@ export class EventosComponent implements OnInit, OnDestroy {
   }
 
   filterEvents(): void {
+    if (this.searchTerm == null || this.searchTerm == '') {
+      this.load();
+    }
     if (this.eventos) {
       this.eventos = this.eventos.filter(
         evento =>

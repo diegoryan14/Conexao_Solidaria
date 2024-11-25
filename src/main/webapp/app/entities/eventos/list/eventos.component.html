@@ -16,16 +16,16 @@
       </button>
     </div>
 
-    <app-alert-error></app-alert-error>
-    <app-alert></app-alert>
+    <!-- <app-alert-error></app-alert-error>
+    <app-alert></app-alert> -->
     <app-filter [filters]="filters"></app-filter>
 
     <!-- <div *ngIf="eventos?.length === 0" class="alert alert-warning text-center" id="no-result">
       <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
     </div> -->
 
-    <app-alert-error></app-alert-error>
-    <app-alert></app-alert>
+    <!-- <app-alert-error></app-alert-error>
+    <app-alert></app-alert> -->
     <app-filter [filters]="filters"></app-filter>
 
     @if (eventos?.length === 0) {
@@ -48,7 +48,7 @@
         </h2>
         <div class="event-container">
           <div class="event-card" *ngFor="let evento of eventos; let i = index; trackBy: trackId">
-            <img class="event-image" src="../../../../content/images/jhipster_family_member_1.svg" alt="Imagem do Evento" />
+            <img class="event-image" src="../../../../content/images/img_sem_nada.jpg" alt="Imagem do Evento" />
             <h3>{{ evento.nome }}</h3>
             <p class="card-text">
               <span [ngClass]="evento.isInscrito ? 'text-success' : 'text-danger'">
