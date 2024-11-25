@@ -14,7 +14,7 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="data" type="${datetimeType}">
+            <column name="data" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="bigint">
@@ -25,7 +25,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="inscricao" columnName="data" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="inscricao" columnName="data" columnDataType="datetime"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

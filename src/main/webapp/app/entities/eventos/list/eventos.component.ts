@@ -160,12 +160,23 @@ export class EventosComponent implements OnInit, OnDestroy {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
+    let listEvent: IEventos[] | undefined = [];
     dataFromBody.forEach(e => {
       if (e.dataEvento) {
         e.dataEventFormat = e.dataEvento.format('DD/MM/YYYY');
       }
+      if (this.user.tipoUser == 'ENTIDADE') {
+        if (this.user.id == e.user?.id) {
+          listEvent.push(e);
+        }
+      }
     });
-    this.eventos = dataFromBody;
+    if (this.user.tipoUser == 'ENTIDADE') {
+      this.eventos = listEvent;
+    }
+    if (this.user.tipoUser == 'COLABORADOR') {
+      this.eventos = dataFromBody;
+    }
   }
 
   protected fillComponentAttributesFromResponseBody(data: IEventos[] | null): IEventos[] {

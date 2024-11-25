@@ -99,7 +99,7 @@
                   usePreparedStatements="true">
             <column name="user_id" type="numeric"/>
         </loadData>
-        <dropDefaultValue tableName="app_user" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="app_user" columnName="created_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet author="jhipster" id="00000000000002" context="test">

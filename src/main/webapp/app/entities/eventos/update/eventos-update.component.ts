@@ -12,6 +12,7 @@ import { UserService } from 'app/entities/user/service/user.service';
 import { IEventos } from '../eventos.model';
 import { EventosService } from '../service/eventos.service';
 import { EventosFormService, EventosFormGroup } from './eventos-form.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   standalone: true,
@@ -24,10 +25,12 @@ export class EventosUpdateComponent implements OnInit {
   eventos: IEventos | null = null;
 
   usersSharedCollection: IUser[] = [];
+  user: any = null;
 
   protected eventosService = inject(EventosService);
   protected eventosFormService = inject(EventosFormService);
   protected userService = inject(UserService);
+  protected accountService = inject(AccountService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -42,6 +45,10 @@ export class EventosUpdateComponent implements OnInit {
         this.updateForm(eventos);
       }
 
+      this.accountService.identity().subscribe(account => {
+        this.user = account;
+      });
+
       this.loadRelationshipsOptions();
     });
   }
@@ -52,11 +59,14 @@ export class EventosUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
+    // this.editForm.user = this.user.id;
     const eventos = this.eventosFormService.getEventos(this.editForm);
     if (eventos.id !== null) {
       this.subscribeToSaveResponse(this.eventosService.update(eventos));
     } else {
+      eventos.user = this.user;
       this.subscribeToSaveResponse(this.eventosService.create(eventos));
+      console.log(eventos);
     }
   }
 

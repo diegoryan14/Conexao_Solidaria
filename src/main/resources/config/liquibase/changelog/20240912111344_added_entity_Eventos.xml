@@ -17,10 +17,10 @@
             <column name="nome" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="data_cadastro" type="${datetimeType}">
+            <column name="data_cadastro" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="data_evento" type="${datetimeType}">
+            <column name="data_evento" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="hora_inicio" type="varchar(255)">
@@ -37,8 +37,8 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="eventos" columnName="data_cadastro" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="eventos" columnName="data_evento" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="eventos" columnName="data_cadastro" columnDataType="datetime"/>
+        <dropDefaultValue tableName="eventos" columnName="data_evento" columnDataType="datetime"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

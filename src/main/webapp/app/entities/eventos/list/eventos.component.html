@@ -5,7 +5,9 @@
       data-cy="EventosHeading"
       class="text-center"
       style="margin-bottom: 50px; margin-left: 200px; font-weight: bold; text-overflow: ellipsis"
-    ></h2>
+    >
+      Eventos disponíveis
+    </h2>
 
     <div class="search-bar-container">
       <input type="text" placeholder="Pesquisar eventos..." [(ngModel)]="searchTerm" class="search-bar" />
@@ -18,9 +20,9 @@
     <app-alert></app-alert>
     <app-filter [filters]="filters"></app-filter>
 
-    <div *ngIf="eventos?.length === 0" class="alert alert-warning text-center" id="no-result">
+    <!-- <div *ngIf="eventos?.length === 0" class="alert alert-warning text-center" id="no-result">
       <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
-    </div>
+    </div> -->
 
     <app-alert-error></app-alert-error>
     <app-alert></app-alert>
@@ -28,7 +30,7 @@
 
     @if (eventos?.length === 0) {
       <div class="alert text-center" id="no-result">
-        <span appTranslate="conexaoSolidariaApp.eventos.home.notFound">Nenhum Evento encontrado</span>
+        <span>Nenhum Evento encontrado</span>
       </div>
     }
 
